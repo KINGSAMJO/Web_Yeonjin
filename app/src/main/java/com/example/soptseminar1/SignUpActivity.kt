@@ -15,10 +15,10 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.btnSignUpEnd.setOnClickListener{
             val intent = Intent(this, SignInActivity::class.java)
-            var getName = binding.nameEdit.text.toString()
-            var getID = binding.idEdit.text.toString()
-            var getPW= binding.pwEdit.text.toString()
-            if(getName.length ==0 || getID.length == 0 || getPW.length == 0){
+            val getName = binding.nameEdit.text.toString()
+            val getID = binding.idEdit.text.toString()
+            val getPW= binding.pwEdit.text.toString()
+            if(getName.isEmpty() || getID.isEmpty() || getPW.isEmpty()){
                 Toast.makeText(this, "입력하지 않은 정보가 있습니다.", Toast.LENGTH_SHORT).show()
             }else{
                 intent.putExtra("Id", binding.idEdit.text.toString())

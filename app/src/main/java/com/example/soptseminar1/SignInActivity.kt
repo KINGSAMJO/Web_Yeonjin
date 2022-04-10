@@ -16,18 +16,18 @@ class SignInActivity : AppCompatActivity() {
 
         val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == RESULT_OK){
-                val Id = it.data?.getStringExtra("Id")?:""
-                val Password = it.data?.getStringExtra("Password")?:""
-                binding.idEdit.setText(Id)
-                binding.pwEdit.setText(Password)
+                val id = it.data?.getStringExtra("Id")?:""
+                val password = it.data?.getStringExtra("Password")?:""
+                binding.idEdit.setText(id)
+                binding.pwEdit.setText(password)
             }
         }
 
         binding.btnLogin.setOnClickListener{
             val intent = Intent(this, HomeActivity::class.java)
-            var getID = binding.idEdit.text.toString()
-            var getPW = binding.pwEdit.text.toString()
-            if(getID.length == 0 || getPW.length == 0){
+            val getID = binding.idEdit.text.toString()
+            val getPW = binding.pwEdit.text.toString()
+            if(getID.isEmpty() || getPW.isEmpty()){
                 Toast.makeText(this, "아이디/비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
             }else {
                 startActivity(intent)
