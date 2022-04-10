@@ -90,7 +90,7 @@ binding.btnSignUpEnd.setOnClickListener{
 *** 이름, 나이, MBTI 등 자기소개를 적어주세요 **
     - 이미지를 넣고 싶을 경우 drawable 파일에 넣을 사진을 복사하고 src 속성을 사용하여 불러온다.
 
-![1_3](https://user-images.githubusercontent.com/102457618/162617999-0ef19448-6075-470a-bc0b-6f065aa9e832.JPG)
+![1_3](https://user-images.githubusercontent.com/102457618/162619268-ac480d4b-4add-45d7-8870-afcbd0e2c3fa.JPG)
 
 
 # 성장과제 2-1
@@ -167,6 +167,8 @@ if(!isFinishing){
 
 
 *** 사진 1:1 비율 삽입 **
-`app:layout_constraintDimensionRatio="1:1"` 삽입할 사진의 비율 지정
+`app:layout_constraintDimensionRatio="1:1"` 삽입할 사진 View 비율 지정
+`app:layout_constraintWidth_percent="0.3"` 사진 자체 크기 비율 지정
+`android:scaleType="fitXY"` 뷰 사이즈에 딱 맞게 사진 비율 조정
 
-![2_2](https://user-images.githubusercontent.com/102457618/162618040-403ce6ea-5214-4ef4-b4b5-7a6a4a4c968b.JPG)
+![2_2](https://user-images.githubusercontent.com/102457618/162619316-4e4d8dc0-e3b3-46ed-b4da-914eb5fc999d.JPG)
