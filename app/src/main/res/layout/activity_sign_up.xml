@@ -4,50 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    tools:context=".SignUpActivity"
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/sopt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="회원가입"
-        android:textSize="40dp"
+        android:text="@string/signup"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="500dp" />
+        app:layout_constraintVertical_bias="0.10" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="이름"
-        android:textSize="20dp"
+        android:text="@string/kor_name"
+        android:textSize="20sp"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/sopt"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp" />
 
     <EditText
         android:id="@+id/name_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="이름을 입력해주세요."
+        android:hint="@string/edit_name"
+        android:inputType="text"
+        android:importantForAutofill="no"
         app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintStart_toStartOf="@id/name"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="20dp"
         />
 
     <TextView
         android:id="@+id/id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아이디"
-        android:textSize="20dp"
+        android:text="@string/kor_id"
+        android:textSize="20sp"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/name_edit"
         app:layout_constraintStart_toStartOf="@id/name_edit"
@@ -57,7 +58,9 @@
         android:id="@+id/id_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="아이디를 입력해주세요."
+        android:hint="@string/edit_id"
+        android:inputType="text"
+        android:importantForAutofill="no"
         app:layout_constraintTop_toBottomOf="@id/id"
         app:layout_constraintStart_toStartOf="@id/name_edit"
         app:layout_constraintEnd_toEndOf="@id/name_edit"/>
@@ -66,8 +69,8 @@
         android:id="@+id/pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="비밀번호"
-        android:textSize="20dp"
+        android:text="@string/kor_pw"
+        android:textSize="20sp"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/id_edit"
         app:layout_constraintStart_toStartOf="@id/name_edit"
@@ -77,17 +80,18 @@
         android:id="@+id/pw_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="비밀번호를 입력해주세요."
+        android:hint="@string/edit_pw"
+        android:inputType="textPassword"
+        android:importantForAutofill="no"
         app:layout_constraintTop_toBottomOf="@id/pw"
         app:layout_constraintStart_toStartOf="@id/name_edit"
-        app:layout_constraintEnd_toEndOf="@id/name_edit"
-        android:inputType="textPassword"/>
+        app:layout_constraintEnd_toEndOf="@id/name_edit" />
 
     <Button
         android:id="@+id/btnSignUpEnd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="회원가입 완료"
+        android:text="@string/signupend"
 
         app:layout_constraintTop_toBottomOf="@id/pw_edit"
         android:layout_marginTop="30dp"
