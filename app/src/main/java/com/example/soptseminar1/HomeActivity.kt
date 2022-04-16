@@ -5,8 +5,10 @@ import android.os.Bundle
 import com.example.soptseminar1.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
+
     private var position = FOLLOWER
     private lateinit var binding: ActivityHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)

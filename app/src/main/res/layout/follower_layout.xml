@@ -10,13 +10,14 @@
         android:id="@+id/prof_pic"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/pic"
+        android:src="@drawable/kingsamzo"
         app:layout_constraintDimensionRatio="1:1"
         android:scaleType="fitXY"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.25"/>
+        app:layout_constraintWidth_percent="0.2"
+        android:contentDescription="@string/pic"/>
 
     <TextView
         android:id="@+id/prof_name"
@@ -38,7 +39,9 @@
         app:layout_constraintTop_toBottomOf="@id/prof_name"
         app:layout_constraintStart_toStartOf="@id/prof_name"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="자기소개 텍스트"/>
+        tools:text="자기소개 텍스트"
+        android:maxLines="1"
+        android:ellipsize="end"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

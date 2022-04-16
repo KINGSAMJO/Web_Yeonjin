@@ -11,10 +11,10 @@
         android:theme="@style/Theme.SoptSeminar1">
         <activity
             android:name=".HomeActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".SignUpActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".SignInActivity"
             android:exported="true">
