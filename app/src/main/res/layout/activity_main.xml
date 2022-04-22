@@ -69,8 +69,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/login"
-        app:layout_constraintTop_toBottomOf="@id/pw_edit"
+        android:backgroundTint="#D0EAAB"
         android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/pw_edit"
         app:layout_constraintStart_toStartOf="@id/id_edit"
         app:layout_constraintEnd_toEndOf="@id/id_edit" />
 
@@ -79,7 +80,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/signup"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:backgroundTint="#83CAC9"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintStart_toStartOf="@id/id_edit"
         app:layout_constraintEnd_toEndOf="@id/btnLogin"/>

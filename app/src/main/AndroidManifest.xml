@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SoptSeminar1">
         <activity
+            android:name=".DetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity

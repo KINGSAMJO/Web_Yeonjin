@@ -18,4 +18,6 @@
     <string name="pic">프로필사진</string>
     <string name="follower">팔로워</string>
     <string name="repository">레포지토리</string>
+    <string name="name">이름 : </string>
+    <string name="introduce">설명 : </string>
 </resources>

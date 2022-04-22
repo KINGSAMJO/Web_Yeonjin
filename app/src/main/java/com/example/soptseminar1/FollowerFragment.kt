@@ -1,5 +1,6 @@
 package com.example.soptseminar1
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,7 +17,6 @@ class FollowerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentFollowerBinding.inflate(layoutInflater, container, false)
         initFollowerRecyclerView()
         return binding.root
@@ -28,7 +28,13 @@ class FollowerFragment : Fragment() {
     }
 
     private fun initFollowerRecyclerView(){
-        followerRecyclerView = FollowerRecyclerView()
+        binding.rvFollower.addItemDecoration(MyItemDecoration())
+        followerRecyclerView = FollowerRecyclerView{
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra("name", it.name)
+            intent.putExtra("introduction", it.introduction)
+            startActivity(intent)
+        }
         _binding?.rvFollower?.adapter = followerRecyclerView
         followerRecyclerView.followerList.addAll(
             listOf(

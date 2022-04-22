@@ -28,6 +28,7 @@ class RepositoryFragment : Fragment() {
     }
 
     private fun initRepoRecyclerView(){
+        binding.rvFollower.addItemDecoration(MyItemDecoration())
         repositoryRecyclerView = RepositoryRecyclerView()
         _binding?.rvFollower?.adapter = repositoryRecyclerView
         repositoryRecyclerView.repositoryList.addAll(

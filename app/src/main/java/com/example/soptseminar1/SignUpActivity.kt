@@ -21,7 +21,7 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(this, SignInActivity::class.java)
             val name = binding.nameEdit.text.toString()
             val id = binding.idEdit.text.toString()
-            val pw= binding.pwEdit.text.toString()
+            val pw = binding.pwEdit.text.toString()
             if(name.isEmpty() || id.isEmpty() || pw.isEmpty()){
                 Toast.makeText(this, "입력하지 않은 정보가 있습니다.", Toast.LENGTH_SHORT).show()
             }else{
