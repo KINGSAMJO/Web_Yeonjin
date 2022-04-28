@@ -9,35 +9,44 @@ import com.example.soptseminar1.databinding.ActivityMainBinding
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    private val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if(it.resultCode == RESULT_OK){
+            val edit_id = it.data?.getStringExtra("edit_id")?:""
+            val edit_pw = it.data?.getStringExtra("edit_pw")?:""
+            binding.idEdit.setText(edit_id)
+            binding.pwEdit.setText(edit_pw)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            if(it.resultCode == RESULT_OK){
-                val id = it.data?.getStringExtra("Id")?:""
-                val password = it.data?.getStringExtra("Password")?:""
-                binding.idEdit.setText(id)
-                binding.pwEdit.setText(password)
-            }
-        }
+        login()
+        signUp()
 
+    }
+
+    private fun login(){
         binding.btnLogin.setOnClickListener{
             val intent = Intent(this, HomeActivity::class.java)
-            val getID = binding.idEdit.text.toString()
-            val getPW = binding.pwEdit.text.toString()
-            if(getID.isEmpty() || getPW.isEmpty()){
+            val id = binding.idEdit.text.toString()
+            val pw = binding.pwEdit.text.toString()
+            if(id.isEmpty() || pw.isEmpty()){
                 Toast.makeText(this, "아이디/비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
             }else {
                 startActivity(intent)
             }
         }
+    }
 
+    private fun signUp(){
         binding.btnSignUp.setOnClickListener{
             val intent = Intent(this, SignUpActivity::class.java)
             activityResultLauncher.launch(intent)
         }
-
     }
+
 }

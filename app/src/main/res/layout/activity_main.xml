@@ -4,50 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInActivity">
+    tools:context=".SignInActivity"
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/sopt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SOPT"
-        android:textSize="40dp"
+        android:text="@string/sopt_name"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="450dp" />
+        app:layout_constraintVertical_bias="0.10" />
 
     <TextView
         android:id="@+id/id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아이디"
-        android:textSize="20dp"
+        android:text="@string/kor_id"
+        android:textSize="20sp"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/sopt"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp" />
 
     <EditText
         android:id="@+id/id_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="아이디를 입력해주세요."
+        android:hint="@string/edit_id"
+        android:inputType="text"
+        android:importantForAutofill="no"
         app:layout_constraintTop_toBottomOf="@id/id"
         app:layout_constraintStart_toStartOf="@id/id"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="20dp"
-        />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="비밀번호"
-        android:textSize="20dp"
+        android:text="@string/kor_pw"
+        android:textSize="20sp"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/id_edit"
         app:layout_constraintStart_toStartOf="@id/id_edit"
@@ -57,7 +57,8 @@
         android:id="@+id/pw_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="비밀번호를 입력해주세요."
+        android:hint="@string/edit_pw"
+        android:importantForAutofill="no"
         app:layout_constraintTop_toBottomOf="@id/pw"
         app:layout_constraintStart_toStartOf="@id/id_edit"
         app:layout_constraintEnd_toEndOf="@id/id_edit"
@@ -67,9 +68,10 @@
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="LOGIN"
-        app:layout_constraintTop_toBottomOf="@id/pw_edit"
+        android:text="@string/login"
+        android:backgroundTint="#D0EAAB"
         android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/pw_edit"
         app:layout_constraintStart_toStartOf="@id/id_edit"
         app:layout_constraintEnd_toEndOf="@id/id_edit" />
 
@@ -77,8 +79,8 @@
         android:id="@+id/btnSignUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="회원가입"
-        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:text="@string/signup"
+        android:backgroundTint="#83CAC9"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintStart_toStartOf="@id/id_edit"
         app:layout_constraintEnd_toEndOf="@id/btnLogin"/>
