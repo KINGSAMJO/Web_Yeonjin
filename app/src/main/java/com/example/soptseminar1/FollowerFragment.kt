@@ -6,12 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.soptseminar1.databinding.FragmentFollowerBinding
 
 class FollowerFragment : Fragment() {
-    private lateinit var followerRecyclerView: FollowerRecyclerView
+    private lateinit var followerAdapter: FollowerAdapter
     private var _binding: FragmentFollowerBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다.")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,14 +30,15 @@ class FollowerFragment : Fragment() {
 
     private fun initFollowerRecyclerView(){
         binding.rvFollower.addItemDecoration(MyItemDecoration())
-        followerRecyclerView = FollowerRecyclerView{
-            val intent = Intent(requireContext(), DetailActivity::class.java)
-            intent.putExtra("name", it.name)
-            intent.putExtra("introduction", it.introduction)
+        followerAdapter = FollowerAdapter{
+            val intent = Intent(requireContext(), DetailActivity::class.java).apply{
+                putExtra("name", it.name)
+                putExtra("introduction", it.introduction)
+            }
             startActivity(intent)
         }
-        _binding?.rvFollower?.adapter = followerRecyclerView
-        followerRecyclerView.followerList.addAll(
+        _binding?.rvFollower?.adapter = followerAdapter
+        followerAdapter.followerList.addAll(
             listOf(
                 FollowerData("한승현", "KINGSAMZO 대장"),
                 FollowerData("박현정", "KINGSAMZO"),
@@ -44,6 +46,6 @@ class FollowerFragment : Fragment() {
                 FollowerData("황연진", "KINGSAMZO")
             )
         )
-        followerRecyclerView.notifyDataSetChanged()
+        followerAdapter.notifyDataSetChanged()
     }
 }

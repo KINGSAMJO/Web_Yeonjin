@@ -7,18 +7,17 @@
     android:padding="10dp"
     android:background="@drawable/item_border">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/prof_pic"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/pic"
         android:src="@drawable/kingsamzo"
         app:layout_constraintDimensionRatio="1:1"
-        android:scaleType="fitXY"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.2"
-        android:contentDescription="@string/pic"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.2" />
 
     <TextView
         android:id="@+id/prof_name"
@@ -26,9 +25,11 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:fontFamily="@font/nanum_gothic_kr"
         app:layout_constraintStart_toEndOf="@id/prof_pic"
         app:layout_constraintTop_toTopOf="@id/prof_pic"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         tools:text="이름"/>
 
     <TextView
@@ -37,6 +38,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="14sp"
+        android:fontFamily="@font/nanum_gothic_kr"
         app:layout_constraintTop_toBottomOf="@id/prof_name"
         app:layout_constraintStart_toStartOf="@id/prof_name"
         app:layout_constraintBottom_toBottomOf="parent"

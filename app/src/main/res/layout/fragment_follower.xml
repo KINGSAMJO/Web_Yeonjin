@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="4"
-        tools:listitem="@layout/follower_layout"/>
+        tools:listitem="@layout/follower_layout"
+        android:layout_marginHorizontal="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

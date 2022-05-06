@@ -2,6 +2,7 @@ package com.example.soptseminar1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.example.soptseminar1.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
@@ -12,13 +13,21 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        information()
+        getFollowerInfo()
+        initImage()
     }
 
-    private fun information(){
+    private fun getFollowerInfo() {
         val name = intent.getStringExtra("name")
         val introduction = intent.getStringExtra("introduction")
         binding.detailName.setText(name)
         binding.detailIntroduction.setText(introduction)
+    }
+
+    private fun initImage(){
+        Glide.with(this)
+            .load(R.drawable.kingsamzo)
+            .circleCrop()
+            .into(binding.detailImage)
     }
 }
