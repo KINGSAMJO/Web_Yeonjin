@@ -1,7 +1,7 @@
 # 필수과제 1-1
 FollowerRecyclerView, RepositoryRecyclerView 만들기(HomeActivity)
 
-*** 각각의 RecyclerView 담고있는 Fragment 2개 만들기**
+**각각의 RecyclerView 담고있는 Fragment 2개 만들기**
 ```xml
 <!--fragment_follower.xml-->
 <!--fragment의 xml 파일에 RecyclerView 생성-->
@@ -25,7 +25,7 @@ FollowerRecyclerView, RepositoryRecyclerView 만들기(HomeActivity)
 ```
 
 
-*** 각각의 버튼 눌렀을 때 알맞은 Fragment로 전환되게 하기**
+**각각의 버튼 눌렀을 때 알맞은 Fragment로 전환되게 하기**
 ```kotlin
 //HomeActivity.kt
 private fun initTransactionEvent(){
@@ -72,7 +72,7 @@ private fun initTransactionEvent(){
 ![1_1(2)](https://user-images.githubusercontent.com/102457618/164720454-5bf7599f-29af-4ca6-a238-c20573af8529.JPG)
 
 
-*** FollowerRecyclerView, RepositoryRecyclerView 만들기**
+**FollowerRecyclerView, RepositoryRecyclerView 만들기**
 ```kotlin
 //FollowerRecyclerView.kt
 class FollowerRecyclerView : RecyclerView.Adapter<FollowerRecyclerView.FollowerViewHolder>() {
@@ -109,7 +109,7 @@ class FollowerRecyclerView : RecyclerView.Adapter<FollowerRecyclerView.FollowerV
     - .from() : 어떤 레이아웃에 접근해야할지 알려주기 위해 context(정보를 담는 곳)를 인자로 전달하여 inflate
 
 
-*** 설명이 너무 길어서 글씨가 길어지면 뒤에 ...으로 표시되게 하기**
+**설명이 너무 길어서 글씨가 길어지면 뒤에 ...으로 표시되게 하기**
 `android:maxLines="1"` 줄이 내려가지 않도록 maxLines 속성 사용
 `android:ellipsize="end"` 뒤에 ...으로 표시되도록 ellipsize 속성 사용
 
@@ -120,7 +120,7 @@ class FollowerRecyclerView : RecyclerView.Adapter<FollowerRecyclerView.FollowerV
 # 필수과제 1-2
 둘 중 하나의 RecyclerView는 GridLayout으로 만들기
 
-*** GridLayout**
+**GridLayout**
 ```xml
 <!--fragment_repository.xml-->
 <androidx.recyclerview.widget.RecyclerView
@@ -139,7 +139,7 @@ class FollowerRecyclerView : RecyclerView.Adapter<FollowerRecyclerView.FollowerV
 # 성장과제 2-1
 아이템 클릭 시 상세 설명을 보여주는 Activity로 이동하기(DetailActivity)
 
-*** 아이템 클릭 시 해당 아이템의 이름과 설명 값을 DetailActivity에서 보여주기**
+**아이템 클릭 시 해당 아이템의 이름과 설명 값을 DetailActivity에서 보여주기**
 ```kotlin
 //FollowerRecyclerView.kt
 //조장님 블로그 참고했습니다(__)
@@ -191,7 +191,7 @@ private fun information(){
 # 성장과제 2-2
 ItemDecoration 활용해서 리스트 간 간격 또는 구분선 주기(MyItemDecoration)
 
-*** ItemDecoration을 활용해서 구분선 or 아이템 간 간격(margin)주기**
+**ItemDecoration을 활용해서 구분선 or 아이템 간 간격(margin)주기**
 1. 구분선
 ```kotlin
 //MyItemDecoration.kt

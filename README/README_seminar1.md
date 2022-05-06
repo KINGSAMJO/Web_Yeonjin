@@ -1,8 +1,8 @@
 # 필수과제 1-1
 로그인 페이지 만들기(SignInActivity)
 
-*** 아이디, 비밀번호 모두 입력이 되어있을 때만 로그인 버튼 클릭 시 HomeActivity로 이동**
-*** 반대로 둘 중 하나라도 비어있다면 "아이디/비밀번호를 확인해주세요"라는 토스트 메시지 출력**
+**아이디, 비밀번호 모두 입력이 되어있을 때만 로그인 버튼 클릭 시 HomeActivity로 이동**
+**반대로 둘 중 하나라도 비어있다면 "아이디/비밀번호를 확인해주세요"라는 토스트 메시지 출력**
 ```kotlin
 //로그인 버튼 클릭 시
 binding.btnLogin.setOnClickListener{
@@ -24,15 +24,15 @@ binding.btnLogin.setOnClickListener{
     - Toast : 사용자에게 짧은 메시지 형식으로 정보를 전달하는 팝업
 
 
-*** 비밀번호 EditTextView는 입력 내용이 가려져야 합니다**
+**비밀번호 EditTextView는 입력 내용이 가려져야 합니다**
 `android:inputType="textPassword"` InputType 속성 사용
 
 
-*** 모든 EditTextView는 미리보기 글씨가 있어야 합니다**
+**모든 EditTextView는 미리보기 글씨가 있어야 합니다**
 `android:hint="아이디를 입력해주세요."` hint 속성 사용
 
 
-*** 회원가입 버튼을 클릭 시 SignUpActivity로 이동**
+**회원가입 버튼을 클릭 시 SignUpActivity로 이동**
 ```kotlin
 //회원가입 버튼 클릭 시
 binding.btnSignUp.setOnClickListener{
@@ -50,8 +50,8 @@ binding.btnSignUp.setOnClickListener{
 # 필수과제 1-2
 회원가입 페이지 만들기(SignUpActivity)
 
-*** 이름, 아이디, 비밀번호 모두 입력이 되어있을 때만 회원가입 버튼을 눌렀을 때 다시 SignUpActivity로 이동**
-*** 셋 중 하나라도 비어있다면 "입력되지 않은 정보가 있습니다"라는 토스트 메세지 출력
+**이름, 아이디, 비밀번호 모두 입력이 되어있을 때만 회원가입 버튼을 눌렀을 때 다시 SignUpActivity로 이동**
+**셋 중 하나라도 비어있다면 "입력되지 않은 정보가 있습니다"라는 토스트 메세지 출력**
 ```kotlin
 //회원가입 완료 버튼 클릭 시
 binding.btnSignUpEnd.setOnClickListener{
@@ -72,11 +72,11 @@ binding.btnSignUpEnd.setOnClickListener{
     - finish() : 쌓였던 액티비티 스택 중 현재 스택을 종료하는 함수, Intent 직전의 액티비티로 돌아감
 
 
-*** 비밀번호 EditTextView는 입력 내용이 가려져야 합니다 **
+**비밀번호 EditTextView는 입력 내용이 가려져야 합니다**
 `android:inputType="textPassword"` InputType 속성 사용
 
 
-*** 모든 EditTextView는 미리보기 글씨가 있어야 합니다**
+**모든 EditTextView는 미리보기 글씨가 있어야 합니다**
 `android:hint="아이디를 입력해주세요."` hint 속성 사용
 
 ![1_2(1)](https://user-images.githubusercontent.com/102457618/162617978-1371a077-492c-4202-9fc9-45e02d7e5289.JPG)
@@ -86,8 +86,8 @@ binding.btnSignUpEnd.setOnClickListener{
 # 필수과제 1-3
 자기소개 페이지 만들기(HomeActivity)
 
-*** ImageView, TextView 활용 **
-*** 이름, 나이, MBTI 등 자기소개를 적어주세요 **
+**ImageView, TextView 활용**
+**이름, 나이, MBTI 등 자기소개를 적어주세요**
     - 이미지를 넣고 싶을 경우 drawable 파일에 넣을 사진을 복사하고 src 속성을 사용하여 불러온다.
 
 ![1_3](https://user-images.githubusercontent.com/102457618/162619268-ac480d4b-4add-45d7-8870-afcbd0e2c3fa.JPG)
@@ -96,8 +96,8 @@ binding.btnSignUpEnd.setOnClickListener{
 # 성장과제 2-1
 화면이동 + 입력한 데이터 이동
 
-*** 회원가입(SignUpActivity)이 성공한다면 이전 로그인 화면으로 돌아옵니다 **
-*** 이때 회원가입에서 입력했던 아이디와 비밀번호가 입력되어 있어야 합니다 **
+**회원가입(SignUpActivity)이 성공한다면 이전 로그인 화면으로 돌아옵니다**
+**이때 회원가입에서 입력했던 아이디와 비밀번호가 입력되어 있어야 합니다**
 1. SignInActivity
 ```kotlin
 //회원가입 후 입력한 아이디와 비밀번호를 가져올 launcher
@@ -147,7 +147,7 @@ if(!isFinishing){
 
 # 성장과제 2-2
 자기소개 스크롤뷰 + 사진 1:1 비율 삽입
-*** 자기소개 스크롤뷰 **
+**자기소개 스크롤뷰**
 ```xml
 <ScrollView
     android:layout_width="match_parent"
@@ -166,7 +166,7 @@ if(!isFinishing){
     - 따라서 여러개의 View를 가지고 싶을 때는 내부에 ViewGroup을 새로 만들어야 함
 
 
-*** 사진 1:1 비율 삽입 **
+**사진 1:1 비율 삽입**
 `app:layout_constraintDimensionRatio="1:1"` 삽입할 사진 View 비율 지정
 `app:layout_constraintWidth_percent="0.3"` 사진 자체 크기 비율 지정
 `android:scaleType="fitXY"` 뷰 사이즈에 딱 맞게 사진 비율 조정
