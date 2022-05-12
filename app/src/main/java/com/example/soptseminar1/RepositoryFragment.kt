@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import com.example.soptseminar1.databinding.FragmentRepositoryBinding
 
 class RepositoryFragment : Fragment() {
-    private lateinit var repositoryRecyclerView: RepositoryRecyclerView
+    private lateinit var repositoryAdapter: RepositoryAdapter
     private var _binding: FragmentRepositoryBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다.")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentRepositoryBinding.inflate(layoutInflater, container, false)
         initRepoRecyclerView()
         return binding.root
@@ -27,11 +26,11 @@ class RepositoryFragment : Fragment() {
         _binding = null
     }
 
-    private fun initRepoRecyclerView(){
+    private fun initRepoRecyclerView() {
         binding.rvFollower.addItemDecoration(MyItemDecoration())
-        repositoryRecyclerView = RepositoryRecyclerView()
-        _binding?.rvFollower?.adapter = repositoryRecyclerView
-        repositoryRecyclerView.repositoryList.addAll(
+        repositoryAdapter = RepositoryAdapter()
+        _binding?.rvFollower?.adapter = repositoryAdapter
+        repositoryAdapter.repositoryList.addAll(
             listOf(
                 RepositoryData("안드로이드 과제 레포지토리", "안드로이드 파트 과제"),
                 RepositoryData("iOS 과제 레포지토리", "iOS 파트 과제"),
@@ -41,6 +40,6 @@ class RepositoryFragment : Fragment() {
                 RepositoryData("웹 과제 레포지토리", "웹 파트 과제")
             )
         )
-        repositoryRecyclerView.notifyDataSetChanged()
+        repositoryAdapter.notifyDataSetChanged()
     }
 }

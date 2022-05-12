@@ -17,7 +17,7 @@ class SignUpActivity : AppCompatActivity() {
 
     }
     private fun signUpEnd(){
-        binding.btnSignUpEnd.setOnClickListener{
+        binding.btnSignupend.setOnClickListener{
             val intent = Intent(this, SignInActivity::class.java)
             val name = binding.nameEdit.text.toString()
             val id = binding.idEdit.text.toString()
