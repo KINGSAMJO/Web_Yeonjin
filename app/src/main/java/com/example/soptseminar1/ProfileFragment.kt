@@ -29,7 +29,7 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    private fun initTransactionEvent(){
+    private fun initTransactionEvent() {
         val followerfragment = FollowerFragment()
         val repositoryfragment = RepositoryFragment()
 
@@ -38,12 +38,12 @@ class ProfileFragment : Fragment() {
             .commit()
 
         binding.btnFollower.isSelected = true
-        binding.btnFollower.setOnClickListener{
+        binding.btnFollower.setOnClickListener {
             val transaction = childFragmentManager.beginTransaction()
-            binding.btnFollower.isSelected = true
-            binding.btnRepo.isSelected = false
             when (position) {
                 REPOSITORY -> {
+                    binding.btnFollower.isSelected = true
+                    binding.btnRepo.isSelected = false
                     transaction.replace(R.id.main_fragment, followerfragment)
                     position = FOLLOWER
                 }
@@ -51,12 +51,12 @@ class ProfileFragment : Fragment() {
             transaction.commit()
         }
 
-        binding.btnRepo.setOnClickListener{
+        binding.btnRepo.setOnClickListener {
             val transaction = childFragmentManager.beginTransaction()
-            binding.btnRepo.isSelected = true
-            binding.btnFollower.isSelected = false
             when (position) {
                 FOLLOWER -> {
+                    binding.btnRepo.isSelected = true
+                    binding.btnFollower.isSelected = false
                     transaction.replace(R.id.main_fragment, repositoryfragment)
                     position = REPOSITORY
                 }
@@ -65,7 +65,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun initImage(){
+    private fun initImage() {
         Glide.with(this)
             .load(R.drawable.pic)
             .circleCrop()

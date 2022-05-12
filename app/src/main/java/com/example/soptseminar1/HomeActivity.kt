@@ -35,18 +35,18 @@ class HomeActivity : AppCompatActivity() {
         })
 
         binding.bnvMain.setOnItemSelectedListener {
-            when(it.itemId){
+            return@setOnItemSelectedListener when(it.itemId){
                 R.id.menu_profile -> {
                     binding.vpMain.currentItem = FIRST_FRAGMENT
-                    return@setOnItemSelectedListener true
+                    true
                 }
                 R.id.menu_home -> {
                     binding.vpMain.currentItem = SECOND_FRAGMENT
-                    return@setOnItemSelectedListener true
+                    true
                 }
                 else -> {
                     binding.vpMain.currentItem = THIRD_FRAGMENT
-                    return@setOnItemSelectedListener true
+                    true
                 }
             }
         }

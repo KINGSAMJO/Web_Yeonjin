@@ -7,12 +7,11 @@
     android:padding="10dp"
     android:background="@drawable/item_border">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/prof_pic"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/pic"
-        android:src="@drawable/kingsamzo"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

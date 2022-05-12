@@ -27,6 +27,10 @@ class FollowerAdapter(private val itemClick: (FollowerData) -> (Unit)) :
         private val itemClick: (FollowerData) -> (Unit)
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: FollowerData) {
+            Glide.with(binding.root)
+                .load(data.image)
+                .circleCrop()
+                .into(binding.profPic)
             binding.profName.text = data.name
             binding.profIntroduce.text = data.introduction
             binding.root.setOnClickListener {
