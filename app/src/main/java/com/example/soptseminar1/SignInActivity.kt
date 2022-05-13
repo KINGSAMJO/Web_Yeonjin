@@ -30,7 +30,6 @@ class SignInActivity : AppCompatActivity() {
 
         initLoginEvent()
         signUp()
-
     }
 
     private fun initLoginEvent(){
@@ -75,19 +74,6 @@ class SignInActivity : AppCompatActivity() {
             }
         })
     }
-
-    /*private fun login(){
-        binding.btnLogin.setOnClickListener{
-            val intent = Intent(this, HomeActivity::class.java)
-            val id = binding.idEdit.text.toString()
-            val pw = binding.pwEdit.text.toString()
-            if(id.isEmpty() || pw.isEmpty()){
-                Toast.makeText(this, "아이디/비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
-            }else {
-                startActivity(intent)
-            }
-        }
-    }*/
 
     private fun signUp(){
         binding.btnSignup.setOnClickListener{

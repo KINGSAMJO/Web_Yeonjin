@@ -18,7 +18,6 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initEvent()
-
     }
 
     private fun initEvent(){
@@ -45,6 +44,10 @@ class SignUpActivity : AppCompatActivity() {
                     when(response.code()){
                         201 -> Toast.makeText(this@SignUpActivity,"회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                     }
+                    val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+                    intent.putExtra("edit_id", binding.idEdit.text.toString())
+                    intent.putExtra("edit_pw", binding.pwEdit.text.toString())
+                    setResult(RESULT_OK, intent)
                     finish()
                 } else {
                     when(response.code()){
@@ -59,23 +62,4 @@ class SignUpActivity : AppCompatActivity() {
             }
         })
     }
-
-    /*private fun signUpEnd(){
-        binding.btnSignupend.setOnClickListener{
-            val intent = Intent(this, SignInActivity::class.java)
-            val name = binding.nameEdit.text.toString()
-            val id = binding.idEdit.text.toString()
-            val pw = binding.pwEdit.text.toString()
-            if(name.isEmpty() || id.isEmpty() || pw.isEmpty()){
-                Toast.makeText(this, "입력하지 않은 정보가 있습니다.", Toast.LENGTH_SHORT).show()
-            }else{
-                intent.putExtra("edit_id", binding.idEdit.text.toString())
-                intent.putExtra("edit_pw", binding.pwEdit.text.toString())
-                setResult(RESULT_OK, intent)
-                if(!isFinishing){
-                    finish()
-                }
-            }
-        }
-    }*/
 }
