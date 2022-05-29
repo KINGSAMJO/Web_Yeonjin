@@ -40,8 +40,8 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         initEvent()
+        signUpNetwork()
     }
 
     private fun initEvent(){
@@ -74,33 +74,5 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
         )
-
-        /*call.enqueue(object : Callback<ResponseSignUp>{
-            override fun onResponse(
-                call: Call<ResponseSignUp>,
-                response: Response<ResponseSignUp>
-            ) {
-                if(response.isSuccessful){
-                    when(response.code()){
-                        201 -> Toast.makeText(this@SignUpActivity,"회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                    }
-                    val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
-                    intent.putExtra("edit_id", binding.idEdit.text.toString())
-                    intent.putExtra("edit_pw", binding.pwEdit.text.toString())
-                    setResult(RESULT_OK, intent)
-                    finish()
-                } else {
-                    when(response.code()){
-                        409 -> Toast.makeText(this@SignUpActivity, "이미 존재하는 유저입니다.", Toast.LENGTH_SHORT).show()
-                        else -> Toast.makeText(this@SignUpActivity, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseSignUp>, t: Throwable) {
-                Log.e("NetworkTest", "error:$t")
-            }
-        })*/
-
     }
 }

@@ -14,9 +14,30 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FollowerFragment : Fragment() {
-    private lateinit var followerAdapter: FollowerAdapter
 
-    //https://velog.io/@hoyaho/View-Binding%EC%97%90-%EB%8C%80%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90-%EF%BD%9C-Android-Study
+    fun <ResponseGithubUserFollow> Call<List<ResponseGithubUserFollow>>.enqueueUtil(
+        onSuccess: (List<ResponseGithubUserFollow>) -> Unit,
+        onError: ((stateCode: Int) -> Unit)? = null
+    ) {
+        this.enqueue(object : Callback<List<ResponseGithubUserFollow>> {
+            override fun onResponse(
+                call: Call<List<ResponseGithubUserFollow>>,
+                response: Response<List<ResponseGithubUserFollow>>
+            ) {
+                if (response.isSuccessful) {
+                    onSuccess.invoke(response.body() ?: return)
+                } else {
+                    onError?.invoke(response.code())
+                }
+            }
+
+            override fun onFailure(call: Call<List<ResponseGithubUserFollow>>, t: Throwable) {
+                Log.d("NetworkTest", "error:$t")
+            }
+        })
+    }
+
+    private lateinit var followerAdapter: FollowerAdapter
     private var _binding: FragmentFollowerBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다.")
 
@@ -48,35 +69,27 @@ class FollowerFragment : Fragment() {
 
     }
 
-    private fun followingNetwork(){
-        val call: Call<List<ResponseGithubUserFollow>> = GithubApiCreator.githubApiService.fetchGithubFollowers()
+    private fun followingNetwork() {
+        val call: Call<List<ResponseGithubUserFollow>> =
+            GithubApiCreator.githubApiService.fetchGithubFollowers()
 
-        call.enqueue(object : Callback<List<ResponseGithubUserFollow>>{
-            override fun onResponse(
-                call: Call<List<ResponseGithubUserFollow>>,
-                response: Response<List<ResponseGithubUserFollow>>
-            ) {
-                if(response.isSuccessful){
-                    val data = response.body()
-                    data?.let {
-                        followerAdapter.followerList.addAll(
-                            it.toMutableList()
-                        )
-                        followerAdapter.notifyDataSetChanged()
-                    }
-                } else {
-                    when(response.code()){
-                        304 -> Toast.makeText(requireContext(), "Not modified", Toast.LENGTH_SHORT).show()
-                        401 -> Toast.makeText(requireContext(), "Requires authentication", Toast.LENGTH_SHORT).show()
-                        403 -> Toast.makeText(requireContext(), "Forbidden", Toast.LENGTH_SHORT).show()
-                    }
+        call.enqueueUtil(
+            onSuccess = {
+                it.let {
+                    followerAdapter.followerList.addAll(
+                        it.toMutableList()
+                    )
+                    followerAdapter.notifyDataSetChanged()
+                }
+            },
+            onError = {
+                when (it) {
+                    304 -> Toast.makeText(requireContext(), "Not modified", Toast.LENGTH_SHORT).show()
+                    401 -> Toast.makeText(requireContext(), "Requires authentication", Toast.LENGTH_SHORT).show()
+                    403 -> Toast.makeText(requireContext(), "Forbidden", Toast.LENGTH_SHORT).show()
                 }
             }
-
-            override fun onFailure(call: Call<List<ResponseGithubUserFollow>>, t: Throwable) {
-                Log.e("NetworkTest", "error:$t")
-            }
-        })
+        )
     }
 
 }

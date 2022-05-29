@@ -13,6 +13,29 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RepositoryFragment : Fragment() {
+
+    fun <ResponseGithubUserRepo> Call<List<ResponseGithubUserRepo>>.enqueueUtil(
+        onSuccess: (List<ResponseGithubUserRepo>) -> Unit,
+        onError: ((stateCode: Int) -> Unit)? = null
+    ) {
+        this.enqueue(object : Callback<List<ResponseGithubUserRepo>> {
+            override fun onResponse(
+                call: Call<List<ResponseGithubUserRepo>>,
+                response: Response<List<ResponseGithubUserRepo>>
+            ) {
+                if (response.isSuccessful) {
+                    onSuccess.invoke(response.body() ?: return)
+                } else {
+                    onError?.invoke(response.code())
+                }
+            }
+
+            override fun onFailure(call: Call<List<ResponseGithubUserRepo>>, t: Throwable) {
+                Log.d("NetworkTest", "error:$t")
+            }
+        })
+    }
+
     private lateinit var repositoryAdapter: RepositoryAdapter
     private var _binding: FragmentRepositoryBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다.")
@@ -39,29 +62,21 @@ class RepositoryFragment : Fragment() {
     }
 
     private fun repoNetwork() {
-        val call: Call<List<ResponseGithubUserRepo>> = GithubApiCreator.githubApiService.fetchGithubRepos()
+        val call: Call<List<ResponseGithubUserRepo>> =
+            GithubApiCreator.githubApiService.fetchGithubRepos()
 
-        call.enqueue(object : Callback<List<ResponseGithubUserRepo>>{
-            override fun onResponse(
-                call: Call<List<ResponseGithubUserRepo>>,
-                response: Response<List<ResponseGithubUserRepo>>
-            ) {
-                if(response.isSuccessful){
-                    val data = response.body()
-                    data?.let {
-                        repositoryAdapter.repositoryList.addAll(
-                            it.toMutableList()
-                        )
-                        repositoryAdapter.notifyDataSetChanged()
-                    }
-                } else {
-                    Toast.makeText(requireContext(), "불러오기에 실패했습니다.", Toast.LENGTH_SHORT).show()
+        call.enqueueUtil(
+            onSuccess = {
+                it.let {
+                    repositoryAdapter.repositoryList.addAll(
+                        it.toMutableList()
+                    )
+                    repositoryAdapter.notifyDataSetChanged()
                 }
+            },
+            onError = {
+                Toast.makeText(requireContext(), "불러오기에 실패했습니다.", Toast.LENGTH_SHORT).show()
             }
-
-            override fun onFailure(call: Call<List<ResponseGithubUserRepo>>, t: Throwable) {
-                Log.e("NetworkTest", "error:$t")
-            }
-        })
+        )
     }
 }

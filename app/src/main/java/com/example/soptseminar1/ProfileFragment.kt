@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.soptseminar1.databinding.FragmentProfileBinding
 import retrofit2.Call
@@ -13,6 +14,28 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProfileFragment : Fragment() {
+
+    fun <ResponseGithubUserInformation> Call<ResponseGithubUserInformation>.enqueueUtil(
+        onSuccess: (ResponseGithubUserInformation) -> Unit,
+        onError: ((stateCode: Int) -> Unit)? = null
+    ) {
+        this.enqueue(object : Callback<ResponseGithubUserInformation> {
+            override fun onResponse(
+                call: Call<ResponseGithubUserInformation>,
+                response: Response<ResponseGithubUserInformation>
+            ) {
+                if (response.isSuccessful) {
+                    onSuccess.invoke(response.body() ?: return)
+                } else {
+                    onError?.invoke(response.code())
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseGithubUserInformation>, t: Throwable) {
+                Log.d("NetworkTest", "error:$t")
+            }
+        })
+    }
 
     private var position = FOLLOWER
     private var _binding: FragmentProfileBinding? = null
@@ -33,33 +56,26 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    private fun userInfoNetworking(){
-        val call: Call<ResponseGithubUserInformation> = GithubApiCreator.githubApiService.fetchGithubUserInformation()
+    private fun userInfoNetworking() {
+        val call: Call<ResponseGithubUserInformation> =
+            GithubApiCreator.githubApiService.fetchGithubUserInformation()
 
-        call.enqueue(object : Callback<ResponseGithubUserInformation> {
-            override fun onResponse(
-                call: Call<ResponseGithubUserInformation>,
-                response: Response<ResponseGithubUserInformation>
-            ) {
-                if(response.isSuccessful){
-                    val data = response.body()
-                    data?.let {
-                        Glide.with(this@ProfileFragment)
-                            .load(data.avatar_url)
-                            .circleCrop()
-                            .into(binding.myImage)
-                        binding.myName.text = data.name
-                        binding.myId.text = data.userId
-                        binding.myBio.text = data.bio
-                    }
+        call.enqueueUtil(
+            onSuccess = {
+                it.let {
+                    Glide.with(this)
+                        .load(it.avatar_url)
+                        .circleCrop()
+                        .into(binding.myImage)
+                    binding.myName.text = it.name
+                    binding.myId.text = it.userId
+                    binding.myBio.text = it.bio
                 }
+            },
+            onError = {
+                Toast.makeText(requireContext(), "불러오기에 실패했습니다.", Toast.LENGTH_SHORT).show()
             }
-
-            override fun onFailure(call: Call<ResponseGithubUserInformation>, t: Throwable) {
-                Log.e("NetworkTest", "error:$t")
-            }
-
-        })
+        )
     }
 
     private fun initTransactionEvent() {
