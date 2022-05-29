@@ -11,6 +11,30 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
+
+    fun <ResponseSignUp> Call<ResponseSignUp>.enqueueUtil(
+        onSuccess: (ResponseSignUp) -> Unit,
+        onError: ((stateCode: Int) -> Unit)? = null
+    ){
+        this.enqueue(object : Callback<ResponseSignUp>{
+            override fun onResponse(
+                call: Call<ResponseSignUp>,
+                response: Response<ResponseSignUp>
+            ) {
+                if (response.isSuccessful){
+                    onSuccess.invoke(response.body() ?: return)
+                } else {
+                    onError?.invoke(response.code())
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseSignUp>, t: Throwable) {
+                Log.d("NetworkTest", "error:$t")
+            }
+
+        })
+    }
+
     private lateinit var binding: ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +59,23 @@ class SignUpActivity : AppCompatActivity() {
 
         val call: Call<ResponseSignUp> = ServiceCreator.soptService.postSignUp(requestSignUp)
 
-        call.enqueue(object : Callback<ResponseSignUp>{
+        call.enqueueUtil(
+            onSuccess = {
+                val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+                intent.putExtra("edit_id", binding.idEdit.text.toString())
+                intent.putExtra("edit_pw", binding.pwEdit.text.toString())
+                setResult(RESULT_OK, intent)
+                finish()
+            },
+            onError = {
+                when(it){
+                    409 -> Toast.makeText(this@SignUpActivity, "이미 존재하는 유저입니다.", Toast.LENGTH_SHORT).show()
+                    else -> Toast.makeText(this@SignUpActivity, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+
+        /*call.enqueue(object : Callback<ResponseSignUp>{
             override fun onResponse(
                 call: Call<ResponseSignUp>,
                 response: Response<ResponseSignUp>
@@ -60,6 +100,7 @@ class SignUpActivity : AppCompatActivity() {
             override fun onFailure(call: Call<ResponseSignUp>, t: Throwable) {
                 Log.e("NetworkTest", "error:$t")
             }
-        })
+        })*/
+
     }
 }
