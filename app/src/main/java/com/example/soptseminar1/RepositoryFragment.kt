@@ -1,11 +1,16 @@
 package com.example.soptseminar1
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.soptseminar1.databinding.FragmentRepositoryBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RepositoryFragment : Fragment() {
     private lateinit var repositoryAdapter: RepositoryAdapter
@@ -17,6 +22,7 @@ class RepositoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRepositoryBinding.inflate(layoutInflater, container, false)
+        repoNetwork()
         initRepoRecyclerView()
         return binding.root
     }
@@ -30,16 +36,32 @@ class RepositoryFragment : Fragment() {
         binding.rvFollower.addItemDecoration(MyItemDecoration())
         repositoryAdapter = RepositoryAdapter()
         _binding?.rvFollower?.adapter = repositoryAdapter
-        repositoryAdapter.repositoryList.addAll(
-            listOf(
-                RepositoryData("안드로이드 과제 레포지토리", "안드로이드 파트 과제"),
-                RepositoryData("iOS 과제 레포지토리", "iOS 파트 과제"),
-                RepositoryData("서버 과제 레포지토리", "서버 파트 과제"),
-                RepositoryData("기획 과제 레포지토리", "기획 파트 과제"),
-                RepositoryData("디자인 과제 레포지토리", "디자인 파트 과제"),
-                RepositoryData("웹 과제 레포지토리", "웹 파트 과제")
-            )
-        )
-        repositoryAdapter.notifyDataSetChanged()
+    }
+
+    private fun repoNetwork() {
+        val call: Call<List<ResponseGithubUserRepo>> = GithubApiCreator.githubApiService.fetchGithubRepos()
+
+        call.enqueue(object : Callback<List<ResponseGithubUserRepo>>{
+            override fun onResponse(
+                call: Call<List<ResponseGithubUserRepo>>,
+                response: Response<List<ResponseGithubUserRepo>>
+            ) {
+                if(response.isSuccessful){
+                    val data = response.body()
+                    data?.let {
+                        repositoryAdapter.repositoryList.addAll(
+                            it.toMutableList()
+                        )
+                        repositoryAdapter.notifyDataSetChanged()
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "불러오기에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<ResponseGithubUserRepo>>, t: Throwable) {
+                Log.e("NetworkTest", "error:$t")
+            }
+        })
     }
 }
