@@ -1,49 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:padding="10dp"
-    android:background="@drawable/item_border">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/prof_pic"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="@string/pic"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.2" />
+    <data>
 
-    <TextView
-        android:id="@+id/prof_name"
-        android:layout_width="wrap_content"
+        <variable
+            name="follower"
+            type="com.example.soptseminar1.ResponseGithubUserFollow" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:fontFamily="@font/nanum_gothic_kr"
-        app:layout_constraintStart_toEndOf="@id/prof_pic"
-        app:layout_constraintTop_toTopOf="@id/prof_pic"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        tools:text="이름"/>
+        android:background="@drawable/item_border"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/prof_introduce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:fontFamily="@font/nanum_gothic_kr"
-        app:layout_constraintTop_toBottomOf="@id/prof_name"
-        app:layout_constraintStart_toStartOf="@id/prof_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="자기소개 텍스트"
-        android:maxLines="1"
-        android:ellipsize="end"/>
+        <ImageView
+            android:id="@+id/prof_pic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/pic"
+            android:src="@{follower.avatar_url}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.2" />
+
+        <TextView
+            android:id="@+id/prof_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nanum_gothic_kr"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:text="@{follower.userId}"
+            app:layout_constraintStart_toEndOf="@id/prof_pic"
+            app:layout_constraintTop_toTopOf="@id/prof_pic"
+            tools:text="이름" />
+
+        <TextView
+            android:id="@+id/prof_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/nanum_gothic_kr"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:text="@{follower.bio}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/prof_name"
+            app:layout_constraintTop_toBottomOf="@id/prof_name"
+            tools:text="자기소개 텍스트" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

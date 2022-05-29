@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.soptseminar1.databinding.FollowerLayoutBinding
 
-class FollowerAdapter(private val itemClick: (FollowerData) -> (Unit)) :
+class FollowerAdapter(private val itemClick: (ResponseGithubUserFollow) -> (Unit)) :
     RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>() {
-    val followerList = mutableListOf<FollowerData>()
+    val followerList = mutableListOf<ResponseGithubUserFollow>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowerViewHolder {
         val binding =
@@ -24,15 +24,16 @@ class FollowerAdapter(private val itemClick: (FollowerData) -> (Unit)) :
 
     class FollowerViewHolder(
         private val binding: FollowerLayoutBinding,
-        private val itemClick: (FollowerData) -> (Unit)
+        private val itemClick: (ResponseGithubUserFollow) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: FollowerData) {
+        fun onBind(data: ResponseGithubUserFollow) {
+
             Glide.with(binding.root)
-                .load(data.image)
+                .load(data.avatar_url)
                 .circleCrop()
                 .into(binding.profPic)
-            binding.profName.text = data.name
-            binding.profIntroduce.text = data.introduction
+            binding.profName.text = data.userId
+
             binding.root.setOnClickListener {
                 itemClick(data)
             }

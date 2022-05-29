@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.soptseminar1.databinding.FragmentFollowerBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,6 +25,7 @@ class FollowerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFollowerBinding.inflate(layoutInflater, container, false)
+        followingNetwork()
         initFollowerRecyclerView()
         return binding.root
     }
@@ -37,24 +39,44 @@ class FollowerFragment : Fragment() {
         binding.rvFollower.addItemDecoration(MyItemDecoration())
         followerAdapter = FollowerAdapter {
             val intent = Intent(requireContext(), DetailActivity::class.java).apply {
-                putExtra("image", it.image)
-                putExtra("name", it.name)
-                putExtra("introduction", it.introduction)
+                putExtra("image", it.avatar_url)
+                putExtra("name", it.userId)
             }
             startActivity(intent)
         }
-
-        val kingsamzo =
-            "https://user-images.githubusercontent.com/102457618/167554911-81d86787-6f57-48b2-b4b5-035da28af156.jpg"
         binding.rvFollower.adapter = followerAdapter
-        followerAdapter.followerList.addAll(
-            listOf(
-                FollowerData(kingsamzo, "한승현", "KINGSAMZO 대장"),
-                FollowerData(kingsamzo, "박현정", "KINGSAMZO"),
-                FollowerData(kingsamzo, "이영주", "KINGSAMZO"),
-                FollowerData(kingsamzo, "황연진", "KINGSAMZO")
-            )
-        )
-        followerAdapter.notifyDataSetChanged()
+
     }
+
+    private fun followingNetwork(){
+        val call: Call<List<ResponseGithubUserFollow>> = GithubApiCreator.githubApiService.fetchGithubFollowers()
+
+        call.enqueue(object : Callback<List<ResponseGithubUserFollow>>{
+            override fun onResponse(
+                call: Call<List<ResponseGithubUserFollow>>,
+                response: Response<List<ResponseGithubUserFollow>>
+            ) {
+                if(response.isSuccessful){
+                    val data = response.body()
+                    data?.let {
+                        followerAdapter.followerList.addAll(
+                            it.toMutableList()
+                        )
+                        followerAdapter.notifyDataSetChanged()
+                    }
+                } else {
+                    when(response.code()){
+                        304 -> Toast.makeText(requireContext(), "Not modified", Toast.LENGTH_SHORT).show()
+                        401 -> Toast.makeText(requireContext(), "Requires authentication", Toast.LENGTH_SHORT).show()
+                        403 -> Toast.makeText(requireContext(), "Forbidden", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<ResponseGithubUserFollow>>, t: Throwable) {
+                Log.e("NetworkTest", "error:$t")
+            }
+        })
+    }
+
 }
