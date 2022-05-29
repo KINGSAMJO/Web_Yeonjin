@@ -8,9 +8,9 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class MyItemDecoration : RecyclerView.ItemDecoration() {
+fun Int.pxToDp(): Int = (this / Resources.getSystem().displayMetrics.density).toInt()
 
-    fun Int.dpToPx(): Int = this * Resources.getSystem().displayMetrics.density.toInt()
+class MyItemDecoration : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -19,14 +19,15 @@ class MyItemDecoration : RecyclerView.ItemDecoration() {
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        val offset = 20
-        offset.dpToPx()
+        val offset = 10
+        offset.pxToDp()
         outRect.set(offset, offset, offset, offset)
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
-        val dividerWidth = 3
+        val dividerWidth = 1
+        dividerWidth.pxToDp()
         val paint = Paint()
         paint.color = Color.GRAY
 
@@ -36,7 +37,7 @@ class MyItemDecoration : RecyclerView.ItemDecoration() {
         for (i in 0 until parent.childCount) {
             val child = parent.getChildAt(i)
             val param = child.layoutParams as RecyclerView.LayoutParams
-            val dividerTop = child.bottom + param.bottomMargin + 20
+            val dividerTop = child.bottom + param.bottomMargin + 10
             val dividerBottom = dividerTop + dividerWidth
             c.drawRect(left, dividerTop.toFloat(), right, dividerBottom.toFloat(), paint)
         }

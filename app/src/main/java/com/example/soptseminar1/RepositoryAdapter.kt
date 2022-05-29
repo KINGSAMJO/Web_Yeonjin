@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.soptseminar1.databinding.RepoLayoutBinding
 
 class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
-    val repositoryList = mutableListOf<RepositoryData>()
+    val repositoryList = mutableListOf<ResponseGithubUserRepo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
         val binding = RepoLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,9 +22,9 @@ class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewH
     class RepositoryViewHolder(
         private val binding: RepoLayoutBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: RepositoryData) {
-            binding.repoName.text = data.repo_name
-            binding.repoHomework.text = data.part_name
+        fun onBind(data: ResponseGithubUserRepo) {
+            binding.repoName.text = data.name
+            binding.repoDescription.text = data.description
         }
     }
 }

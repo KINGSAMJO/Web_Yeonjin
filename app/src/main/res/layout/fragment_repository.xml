@@ -10,10 +10,7 @@
         android:id="@+id/rv_follower"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        tools:itemCount="6"
-        tools:listitem="@layout/repo_layout"
-        android:layout_marginHorizontal="10dp"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/repo_layout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
