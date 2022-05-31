@@ -14,20 +14,15 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         getFollowerInfo()
-        initImage()
     }
 
     private fun getFollowerInfo() {
+        val image = intent.getStringExtra("image")
         val name = intent.getStringExtra("name")
-        val introduction = intent.getStringExtra("introduction")
-        binding.detailName.setText(name)
-        binding.detailIntroduction.setText(introduction)
-    }
-
-    private fun initImage(){
         Glide.with(this)
-            .load(R.drawable.kingsamzo)
+            .load(image)
             .circleCrop()
             .into(binding.detailImage)
+        binding.detailName.setText(name)
     }
 }
