@@ -32,6 +32,25 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="30dp" />
 
+    <ImageView
+        android:id="@+id/btn_logincheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_logincheck_button"
+        app:layout_constraintTop_toTopOf="@id/tv_logincheck"
+        app:layout_constraintBottom_toTopOf="@+id/id_edit"
+        app:layout_constraintEnd_toStartOf="@id/tv_logincheck"
+        android:layout_marginEnd="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_logincheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="자동 로그인"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/id_edit"
+        app:layout_constraintEnd_toEndOf="@id/id_edit"/>
+
     <EditText
         android:id="@+id/id_edit"
         android:layout_width="0dp"
