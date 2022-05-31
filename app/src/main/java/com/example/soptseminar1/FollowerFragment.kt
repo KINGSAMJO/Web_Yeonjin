@@ -15,28 +15,6 @@ import retrofit2.Response
 
 class FollowerFragment : Fragment() {
 
-    fun <ResponseGithubUserFollow> Call<List<ResponseGithubUserFollow>>.enqueueUtil(
-        onSuccess: (List<ResponseGithubUserFollow>) -> Unit,
-        onError: ((stateCode: Int) -> Unit)? = null
-    ) {
-        this.enqueue(object : Callback<List<ResponseGithubUserFollow>> {
-            override fun onResponse(
-                call: Call<List<ResponseGithubUserFollow>>,
-                response: Response<List<ResponseGithubUserFollow>>
-            ) {
-                if (response.isSuccessful) {
-                    onSuccess.invoke(response.body() ?: return)
-                } else {
-                    onError?.invoke(response.code())
-                }
-            }
-
-            override fun onFailure(call: Call<List<ResponseGithubUserFollow>>, t: Throwable) {
-                Log.d("NetworkTest", "error:$t")
-            }
-        })
-    }
-
     private lateinit var followerAdapter: FollowerAdapter
     private var _binding: FragmentFollowerBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다.")

@@ -15,28 +15,6 @@ import retrofit2.Response
 
 class ProfileFragment : Fragment() {
 
-    fun <ResponseGithubUserInformation> Call<ResponseGithubUserInformation>.enqueueUtil(
-        onSuccess: (ResponseGithubUserInformation) -> Unit,
-        onError: ((stateCode: Int) -> Unit)? = null
-    ) {
-        this.enqueue(object : Callback<ResponseGithubUserInformation> {
-            override fun onResponse(
-                call: Call<ResponseGithubUserInformation>,
-                response: Response<ResponseGithubUserInformation>
-            ) {
-                if (response.isSuccessful) {
-                    onSuccess.invoke(response.body() ?: return)
-                } else {
-                    onError?.invoke(response.code())
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseGithubUserInformation>, t: Throwable) {
-                Log.d("NetworkTest", "error:$t")
-            }
-        })
-    }
-
     private var position = FOLLOWER
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다.")
@@ -69,7 +47,6 @@ class ProfileFragment : Fragment() {
                         .into(binding.myImage)
                     binding.myName.text = it.name
                     binding.myId.text = it.userId
-                    binding.myBio.text = it.bio
                 }
             },
             onError = {

@@ -12,29 +12,6 @@ import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
 
-    fun <ResponseSignUp> Call<ResponseSignUp>.enqueueUtil(
-        onSuccess: (ResponseSignUp) -> Unit,
-        onError: ((stateCode: Int) -> Unit)? = null
-    ){
-        this.enqueue(object : Callback<ResponseSignUp>{
-            override fun onResponse(
-                call: Call<ResponseSignUp>,
-                response: Response<ResponseSignUp>
-            ) {
-                if (response.isSuccessful){
-                    onSuccess.invoke(response.body() ?: return)
-                } else {
-                    onError?.invoke(response.code())
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseSignUp>, t: Throwable) {
-                Log.d("NetworkTest", "error:$t")
-            }
-
-        })
-    }
-
     private lateinit var binding: ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -13,28 +13,6 @@ import retrofit2.Response
 
 class SignInActivity : AppCompatActivity() {
 
-    fun <ResponseSignIn> Call<ResponseSignIn>.enqueueUtil(
-        onSuccess: (ResponseSignIn) -> Unit,
-        onError: ((stateCode: Int) -> Unit)? = null
-    ) {
-        this.enqueue(object : Callback<ResponseSignIn>{
-            override fun onResponse(
-                call: Call<ResponseSignIn>,
-                response: Response<ResponseSignIn>
-            ) {
-                if(response.isSuccessful){
-                    onSuccess.invoke(response.body() ?: return)
-                } else {
-                    onError?.invoke(response.code())
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseSignIn>, t: Throwable) {
-                Log.d("NetwortkTest", "error:$t")
-            }
-        })
-    }
-
     private lateinit var binding: ActivityMainBinding
 
     private val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -51,8 +29,25 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initClickEvent()
+        isAutoLogin()
         initLoginEvent()
         signUp()
+    }
+
+    private fun initClickEvent(){
+        binding.btnLogincheck.setOnClickListener {
+            binding.btnLogincheck.isSelected = !binding.btnLogincheck.isSelected
+            SOPTSharedPreferences.setAutoLogin(this@SignInActivity, binding.btnLogincheck.isSelected)
+        }
+    }
+
+    private fun isAutoLogin(){
+        if(SOPTSharedPreferences.getAutoLogin(this@SignInActivity)){
+            Toast.makeText(this, "자동 로그인 되었습니다", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+            finish()
+        }
     }
 
     private fun initLoginEvent(){

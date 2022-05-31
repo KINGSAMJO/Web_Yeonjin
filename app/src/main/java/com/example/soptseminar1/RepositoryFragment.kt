@@ -14,28 +14,6 @@ import retrofit2.Response
 
 class RepositoryFragment : Fragment() {
 
-    fun <ResponseGithubUserRepo> Call<List<ResponseGithubUserRepo>>.enqueueUtil(
-        onSuccess: (List<ResponseGithubUserRepo>) -> Unit,
-        onError: ((stateCode: Int) -> Unit)? = null
-    ) {
-        this.enqueue(object : Callback<List<ResponseGithubUserRepo>> {
-            override fun onResponse(
-                call: Call<List<ResponseGithubUserRepo>>,
-                response: Response<List<ResponseGithubUserRepo>>
-            ) {
-                if (response.isSuccessful) {
-                    onSuccess.invoke(response.body() ?: return)
-                } else {
-                    onError?.invoke(response.code())
-                }
-            }
-
-            override fun onFailure(call: Call<List<ResponseGithubUserRepo>>, t: Throwable) {
-                Log.d("NetworkTest", "error:$t")
-            }
-        })
-    }
-
     private lateinit var repositoryAdapter: RepositoryAdapter
     private var _binding: FragmentRepositoryBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다.")
