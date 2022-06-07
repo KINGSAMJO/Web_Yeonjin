@@ -3,4 +3,7 @@
     <font
         android:font="@font/nanum_gothic"
         android:fontWeight="200"/>
+    <font
+        android:font="@font/nanum_gothic_bold"
+        android:fontWeight="400"/>
 </font-family>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_onboarding"
+    app:startDestination="@id/onBoardingFragment1">
+
+    <fragment
+        android:id="@+id/onBoardingFragment1"
+        android:name="com.example.soptseminar1.OnBoardingFragment1"
+        android:label="fragment_on_boarding1"
+        tools:layout="@layout/fragment_on_boarding1" >
+        <action
+            android:id="@+id/action_onBoardingFragment1_to_onBoardingFragment2"
+            app:destination="@id/onBoardingFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/onBoardingFragment2"
+        android:name="com.example.soptseminar1.OnBoardingFragment2"
+        android:label="fragment_on_boarding2"
+        tools:layout="@layout/fragment_on_boarding2" >
+        <action
+            android:id="@+id/action_onBoardingFragment2_to_onBoardingFragment3"
+            app:destination="@id/onBoardingFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/onBoardingFragment3"
+        android:name="com.example.soptseminar1.OnBoardingFragment3"
+        android:label="fragment_on_boarding3"
+        tools:layout="@layout/fragment_on_boarding3" />
+</navigation>
