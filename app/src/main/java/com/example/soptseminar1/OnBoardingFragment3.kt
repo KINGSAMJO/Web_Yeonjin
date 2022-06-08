@@ -32,10 +32,7 @@ class OnBoardingFragment3 : Fragment() {
         binding.btnNext.setOnClickListener {
             val intent = Intent(requireContext(), SignInActivity::class.java)
             startActivity(intent)
-            activity?.supportFragmentManager
-                ?.beginTransaction()
-                ?.remove(this)
-                ?.commit()
+            activity?.finish()
         }
     }
 
