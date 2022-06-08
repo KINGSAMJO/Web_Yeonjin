@@ -46,10 +46,7 @@ class RepositoryFragment : Fragment() {
         call.enqueueUtil(
             onSuccess = {
                 it.let {
-                    repositoryAdapter.repositoryList.addAll(
-                        it.toMutableList()
-                    )
-                    repositoryAdapter.notifyDataSetChanged()
+                    repositoryAdapter.submitList(it)
                 }
             },
             onError = {

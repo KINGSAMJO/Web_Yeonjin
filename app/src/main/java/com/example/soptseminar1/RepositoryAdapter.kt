@@ -2,11 +2,12 @@ package com.example.soptseminar1
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.soptseminar1.databinding.RepoLayoutBinding
 
-class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
-    val repositoryList = mutableListOf<ResponseGithubUserRepo>()
+class RepositoryAdapter : ListAdapter<ResponseGithubUserRepo, RepositoryAdapter.RepositoryViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
         val binding = RepoLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -14,10 +15,8 @@ class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewH
     }
 
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
-        holder.onBind(repositoryList[position])
+        holder.onBind(currentList[position])
     }
-
-    override fun getItemCount(): Int = repositoryList.size
 
     class RepositoryViewHolder(
         private val binding: RepoLayoutBinding
@@ -25,6 +24,24 @@ class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewH
         fun onBind(data: ResponseGithubUserRepo) {
             binding.repoName.text = data.name
             binding.repoDescription.text = data.description
+        }
+    }
+
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<ResponseGithubUserRepo>(){
+            override fun areItemsTheSame(
+                oldItem: ResponseGithubUserRepo,
+                newItem: ResponseGithubUserRepo
+            ): Boolean {
+                return oldItem.name == newItem.name || oldItem.description == newItem.description
+            }
+
+            override fun areContentsTheSame(
+                oldItem: ResponseGithubUserRepo,
+                newItem: ResponseGithubUserRepo
+            ): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 }

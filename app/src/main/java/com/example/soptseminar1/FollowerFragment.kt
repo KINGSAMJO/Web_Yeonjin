@@ -54,10 +54,7 @@ class FollowerFragment : Fragment() {
         call.enqueueUtil(
             onSuccess = {
                 it.let {
-                    followerAdapter.followerList.addAll(
-                        it.toMutableList()
-                    )
-                    followerAdapter.notifyDataSetChanged()
+                    followerAdapter.submitList(it)
                 }
             },
             onError = {

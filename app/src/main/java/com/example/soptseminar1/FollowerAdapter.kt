@@ -2,13 +2,14 @@ package com.example.soptseminar1
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.soptseminar1.databinding.FollowerLayoutBinding
 
 class FollowerAdapter(private val itemClick: (ResponseGithubUserFollow) -> (Unit)) :
-    RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>() {
-    val followerList = mutableListOf<ResponseGithubUserFollow>()
+    ListAdapter<ResponseGithubUserFollow, FollowerAdapter.FollowerViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowerViewHolder {
         val binding =
@@ -17,10 +18,8 @@ class FollowerAdapter(private val itemClick: (ResponseGithubUserFollow) -> (Unit
     }
 
     override fun onBindViewHolder(holder: FollowerViewHolder, position: Int) {
-        holder.onBind(followerList[position])
+        holder.onBind(currentList[position])
     }
-
-    override fun getItemCount(): Int = followerList.size
 
     class FollowerViewHolder(
         private val binding: FollowerLayoutBinding,
@@ -33,10 +32,28 @@ class FollowerAdapter(private val itemClick: (ResponseGithubUserFollow) -> (Unit
                 .circleCrop()
                 .into(binding.profPic)
             binding.profName.text = data.userId
-
             binding.root.setOnClickListener {
                 itemClick(data)
             }
+        }
+    }
+
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<ResponseGithubUserFollow>() {
+            override fun areItemsTheSame(
+                oldItem: ResponseGithubUserFollow,
+                newItem: ResponseGithubUserFollow
+            ): Boolean {
+                return oldItem.userId == newItem.userId || oldItem.avatar_url == newItem.avatar_url
+            }
+
+            override fun areContentsTheSame(
+                oldItem: ResponseGithubUserFollow,
+                newItem: ResponseGithubUserFollow
+            ): Boolean {
+                return oldItem == newItem
+            }
+
         }
     }
 }
