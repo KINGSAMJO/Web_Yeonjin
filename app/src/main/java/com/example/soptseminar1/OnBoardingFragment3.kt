@@ -2,30 +2,16 @@ package com.example.soptseminar1
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.soptseminar1.databinding.FragmentOnBoarding3Binding
 
-class OnBoardingFragment3 : Fragment() {
-    private var _binding: FragmentOnBoarding3Binding? = null
-    private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다.")
+class OnBoardingFragment3 : BaseFragment<FragmentOnBoarding3Binding>(FragmentOnBoarding3Binding::inflate) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentOnBoarding3Binding.inflate(layoutInflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         goSignIn()
         getImageCrop()
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun goSignIn(){
