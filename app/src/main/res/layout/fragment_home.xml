@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
+    tools:context=".presentation.home.HomeFragment">
 
     <ImageView
         android:id="@+id/image_home"
@@ -43,7 +43,7 @@
         app:tabIndicatorColor="@color/layout"
         app:tabSelectedTextColor="@color/layout"/>
 
-    <com.example.soptseminar1.NestedScrollableHost
+    <com.example.soptseminar1.presentation.home.NestedScrollableHost
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,6 +54,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </com.example.soptseminar1.NestedScrollableHost>
+    </com.example.soptseminar1.presentation.home.NestedScrollableHost>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

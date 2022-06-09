@@ -7,7 +7,7 @@
 
         <variable
             name="follower"
-            type="com.example.soptseminar1.ResponseGithubUserFollow" />
+            type="com.example.soptseminar1.data.model.response.ResponseGithubUserFollow" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

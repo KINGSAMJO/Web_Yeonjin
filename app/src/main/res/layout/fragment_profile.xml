@@ -7,13 +7,13 @@
 
         <variable
             name="userinfo"
-            type="com.example.soptseminar1.ResponseGithubUserInformation" />
+            type="com.example.soptseminar1.data.model.response.ResponseGithubUserInformation" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".HomeActivity">
+        tools:context=".presentation.home.HomeActivity">
 
         <ImageView
             android:id="@+id/my_image"
