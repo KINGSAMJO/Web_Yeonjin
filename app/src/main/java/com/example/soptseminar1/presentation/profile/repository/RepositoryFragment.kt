@@ -7,7 +7,7 @@ import com.example.soptseminar1.data.api.GithubApiCreator
 import com.example.soptseminar1.data.model.response.ResponseGithubUserRepo
 import com.example.soptseminar1.databinding.FragmentRepositoryBinding
 import com.example.soptseminar1.enqueueUtil
-import com.example.soptseminar1.presentation.home.MyItemDecoration
+import com.example.soptseminar1.util.MyItemDecoration
 import com.example.soptseminar1.util.BaseFragment
 import retrofit2.Call
 
