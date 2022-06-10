@@ -1,5 +1,6 @@
 package com.example.soptseminar1.presentation.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,6 +11,7 @@ import com.example.soptseminar1.data.model.response.ResponseGithubUserInformatio
 import com.example.soptseminar1.databinding.FragmentProfileBinding
 import com.example.soptseminar1.enqueueUtil
 import com.example.soptseminar1.presentation.profile.follower.FollowerFragment
+import com.example.soptseminar1.presentation.profile.logout.LogoutActivity
 import com.example.soptseminar1.presentation.profile.repository.RepositoryFragment
 import com.example.soptseminar1.util.BaseFragment
 import retrofit2.Call
@@ -20,8 +22,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        goLogoutMenu()
         userInfoNetworking()
         initTransactionEvent()
+    }
+
+    private fun goLogoutMenu(){
+        binding.ivMenu.setOnClickListener {
+            val intent = Intent(requireContext(), LogoutActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun userInfoNetworking() {

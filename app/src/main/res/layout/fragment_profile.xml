@@ -16,6 +16,16 @@
         tools:context=".presentation.home.HomeActivity">
 
         <ImageView
+            android:id="@+id/iv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <ImageView
             android:id="@+id/my_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
