@@ -132,6 +132,76 @@ binding.btnNext.setOnClickListener {
 --------------------
 #추가 구현
 + 서버 연결 확장함수 사용
+```kotlin
+//ContextUtil.kt
+fun <ResponseType> Call<ResponseType>.enqueueUtil(
+   onSuccess: (ResponseType) -> Unit,
+   onError: ((stateCode: Int) -> Unit)? = null
+) {
+   this.enqueue(object : Callback<ResponseType> {
+      override fun onResponse(call: Call<ResponseType>, response: Response<ResponseType>) {
+         if (response.isSuccessful) {
+            onSuccess.invoke(response.body() ?: return)
+         } else {
+            onError?.invoke(response.code())
+         }
+      }
+
+      override fun onFailure(call: Call<ResponseType>, t: Throwable) {
+         Log.d("NetworkTest", "error:$t")
+      }
+
+   })
+}
+```
+
 + DiffUtil / ListAdapter
+```kotlin
+//FollowerAdapter.kt
+companion object {
+   val diffUtil = object : DiffUtil.ItemCallback<ResponseGithubUserFollow>() {
+      override fun areItemsTheSame(
+         oldItem: ResponseGithubUserFollow,
+         newItem: ResponseGithubUserFollow
+      ): Boolean {
+         return oldItem.userId == newItem.userId || oldItem.avatar_url == newItem.avatar_url
+      }
+
+      override fun areContentsTheSame(
+         oldItem: ResponseGithubUserFollow,
+         newItem: ResponseGithubUserFollow
+      ): Boolean {
+         return oldItem == newItem
+      }
+   }
+}
+```
+   - `followerAdapter.submitList(it)` : ListAdapter 부분 업데이트 위해 `submitList()` 사용
+
 + BaseFragment
+```kotlin
+//BaseFragment.kt
+typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
+
+abstract class BaseFragment<T: ViewBinding>(private val inflate: Inflate<T>):
+   Fragment() {
+   private var _binding: T? = null
+   val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다.")
+
+   override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
+   ): View? {
+      _binding = inflate.invoke(inflater, container, false)
+      return binding.root
+   }
+
+   override fun onDestroyView() {
+      super.onDestroyView()
+      _binding = null
+   }
+}
+```
+
 + 패키징
