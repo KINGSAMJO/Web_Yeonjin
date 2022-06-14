@@ -45,7 +45,7 @@ class FollowerAdapter(private val itemClick: (ResponseGithubUserFollow) -> (Unit
                 oldItem: ResponseGithubUserFollow,
                 newItem: ResponseGithubUserFollow
             ): Boolean {
-                return oldItem.userId == newItem.userId || oldItem.avatar_url == newItem.avatar_url
+                return oldItem.userId == newItem.userId
             }
 
             override fun areContentsTheSame(

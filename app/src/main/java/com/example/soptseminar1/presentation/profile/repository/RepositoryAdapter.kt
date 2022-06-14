@@ -36,7 +36,7 @@ class RepositoryAdapter : ListAdapter<ResponseGithubUserRepo, RepositoryAdapter.
                 oldItem: ResponseGithubUserRepo,
                 newItem: ResponseGithubUserRepo
             ): Boolean {
-                return oldItem.name == newItem.name || oldItem.description == newItem.description
+                return oldItem.name == newItem.name
             }
 
             override fun areContentsTheSame(
