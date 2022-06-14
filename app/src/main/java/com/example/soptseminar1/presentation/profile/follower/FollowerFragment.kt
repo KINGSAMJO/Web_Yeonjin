@@ -3,13 +3,13 @@ package com.example.soptseminar1.presentation.profile.follower
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.example.soptseminar1.util.MyItemDecoration
 import com.example.soptseminar1.data.api.GithubApiCreator
 import com.example.soptseminar1.data.model.response.ResponseGithubUserFollow
 import com.example.soptseminar1.databinding.FragmentFollowerBinding
-import com.example.soptseminar1.enqueueUtil
+import com.example.soptseminar1.util.enqueueUtil
 import com.example.soptseminar1.util.BaseFragment
+import com.example.soptseminar1.util.showToast
 import retrofit2.Call
 
 class FollowerFragment : BaseFragment<FragmentFollowerBinding>(FragmentFollowerBinding::inflate) {
@@ -46,9 +46,9 @@ class FollowerFragment : BaseFragment<FragmentFollowerBinding>(FragmentFollowerB
             },
             onError = {
                 when (it) {
-                    304 -> Toast.makeText(requireContext(), "Not modified", Toast.LENGTH_SHORT).show()
-                    401 -> Toast.makeText(requireContext(), "Requires authentication", Toast.LENGTH_SHORT).show()
-                    403 -> Toast.makeText(requireContext(), "Forbidden", Toast.LENGTH_SHORT).show()
+                    304 -> requireContext().showToast("Not modified")
+                    401 -> requireContext().showToast("Requires authentication")
+                    403 -> requireContext().showToast("Forbidden")
                 }
             }
         )

@@ -9,13 +9,13 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.soptseminar1.databinding.FragmentCameraBinding
 import com.example.soptseminar1.util.BaseFragment
+import com.example.soptseminar1.util.showToast
 
 class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding::inflate) {
 
@@ -24,7 +24,7 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
             if (isGranted) {
                 navigateGallery()
             } else {
-                Toast.makeText(requireContext(), "갤러리 접근 권한이 없습니다.", Toast.LENGTH_SHORT).show()
+                requireContext().showToast("갤러리 접근 권한이 없습니다.")
             }
         }
 
@@ -36,7 +36,7 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
                     .load(galleryImage)
                     .into(binding.imgGallery)
             } else if (it.resultCode == RESULT_CANCELED) {
-                Toast.makeText(requireContext(), "사진 선택이 취소되었습니다", Toast.LENGTH_SHORT).show()
+                requireContext().showToast( "사진 선택이 취소되었습니다")
             }
         }
 
@@ -59,7 +59,7 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
                 requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
             .setNegativeButton("거부") { _, _ ->
-                Toast.makeText(requireContext(), "갤러리 접근 권한이 없습니다.", Toast.LENGTH_SHORT).show()
+                requireContext().showToast("갤러리 접근 권한이 없습니다.")
             }
             .create()
             .show()

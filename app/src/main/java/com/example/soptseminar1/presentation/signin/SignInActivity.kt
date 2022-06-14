@@ -3,16 +3,16 @@ package com.example.soptseminar1.presentation.signin
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.soptseminar1.data.api.SOPTSharedPreferences
 import com.example.soptseminar1.data.api.ServiceCreator
 import com.example.soptseminar1.data.model.request.RequestSignIn
 import com.example.soptseminar1.data.model.response.ResponseSignIn
 import com.example.soptseminar1.databinding.ActivityMainBinding
-import com.example.soptseminar1.enqueueUtil
+import com.example.soptseminar1.util.enqueueUtil
 import com.example.soptseminar1.presentation.home.HomeActivity
 import com.example.soptseminar1.presentation.signup.SignUpActivity
+import com.example.soptseminar1.util.showToast
 import retrofit2.Call
 
 class SignInActivity : AppCompatActivity() {
@@ -48,7 +48,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun isAutoLogin(){
         if(SOPTSharedPreferences.getAutoLogin(this@SignInActivity)){
-            Toast.makeText(this, "자동 로그인 되었습니다", Toast.LENGTH_SHORT).show()
+            showToast("자동 로그인 되었습니다")
             startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
             finish()
         }
@@ -71,7 +71,7 @@ class SignInActivity : AppCompatActivity() {
         call.enqueueUtil(
             onSuccess = {
                 val data = it.data
-                Toast.makeText(this@SignInActivity, "${data.email}님 반갑습니다!", Toast.LENGTH_SHORT).show()
+                showToast("${data.email}님 반갑습니다!")
                 startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
                 if(!isFinishing){
                     finish()
@@ -79,9 +79,9 @@ class SignInActivity : AppCompatActivity() {
             },
             onError = {
                 when(it){
-                    404 -> Toast.makeText(this@SignInActivity, "이메일에 해당하는 사용자 정보가 없습니다.", Toast.LENGTH_SHORT).show()
-                    409 -> Toast.makeText(this@SignInActivity, "비밀번호가 올바르지 않습니다.", Toast.LENGTH_SHORT).show()
-                    else -> Toast.makeText(this@SignInActivity, "로그인에 실패하셨습니다.", Toast.LENGTH_SHORT).show()
+                    404 -> showToast("이메일에 해당하는 사용자 정보가 없습니다.")
+                    409 -> showToast("비밀번호가 올바르지 않습니다.")
+                    else -> showToast("로그인에 실패하셨습니다.")
                 }
             }
         )
