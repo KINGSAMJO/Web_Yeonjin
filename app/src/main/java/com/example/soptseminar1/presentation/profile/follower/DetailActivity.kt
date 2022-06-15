@@ -1,17 +1,15 @@
 package com.example.soptseminar1.presentation.profile.follower
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.example.soptseminar1.databinding.ActivityDetailBinding
+import com.example.soptseminar1.util.BaseActivity
 
-class DetailActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDetailBinding
+class DetailActivity : BaseActivity<ActivityDetailBinding>({
+    ActivityDetailBinding.inflate(it) }) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         getFollowerInfo()
     }
@@ -23,6 +21,6 @@ class DetailActivity : AppCompatActivity() {
             .load(image)
             .circleCrop()
             .into(binding.detailImage)
-        binding.detailName.setText(name)
+        binding.detailName.text = name
     }
 }

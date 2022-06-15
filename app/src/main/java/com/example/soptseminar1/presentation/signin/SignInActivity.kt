@@ -1,7 +1,6 @@
 package com.example.soptseminar1.presentation.signin
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.soptseminar1.data.api.SOPTSharedPreferences
@@ -12,12 +11,12 @@ import com.example.soptseminar1.databinding.ActivityMainBinding
 import com.example.soptseminar1.util.enqueueUtil
 import com.example.soptseminar1.presentation.home.HomeActivity
 import com.example.soptseminar1.presentation.signup.SignUpActivity
+import com.example.soptseminar1.util.BaseActivity
 import com.example.soptseminar1.util.showToast
 import retrofit2.Call
 
-class SignInActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
+class SignInActivity : BaseActivity<ActivityMainBinding>({
+    ActivityMainBinding.inflate(it) }) {
 
     private val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == RESULT_OK){
@@ -30,8 +29,6 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         initClickEvent()
         isAutoLogin()

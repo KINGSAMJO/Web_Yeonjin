@@ -1,28 +1,26 @@
 package com.example.soptseminar1.presentation.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.soptseminar1.presentation.profile.ProfileFragment
 import com.example.soptseminar1.R
 import com.example.soptseminar1.databinding.ActivityHomeBinding
 import com.example.soptseminar1.presentation.camera.CameraFragment
+import com.example.soptseminar1.util.BaseActivity
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity<ActivityHomeBinding>({
+    ActivityHomeBinding.inflate(it) }) {
 
-    private lateinit var binding: ActivityHomeBinding
     private lateinit var mainViewPagerAdapter: MainViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         initAdapter()
         initBottomNavi()
     }
 
-    private fun initAdapter(){
+    private fun initAdapter() {
         val fragmentList = listOf(ProfileFragment(), HomeFragment(), CameraFragment())
         mainViewPagerAdapter = MainViewPagerAdapter(this)
         mainViewPagerAdapter.fragments.addAll(fragmentList)
@@ -30,15 +28,15 @@ class HomeActivity : AppCompatActivity() {
         binding.vpMain.adapter = mainViewPagerAdapter
     }
 
-    private fun initBottomNavi(){
-        binding.vpMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+    private fun initBottomNavi() {
+        binding.vpMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 binding.bnvMain.menu.getItem(position).isChecked = true
             }
         })
 
         binding.bnvMain.setOnItemSelectedListener {
-            return@setOnItemSelectedListener when(it.itemId){
+            return@setOnItemSelectedListener when (it.itemId) {
                 R.id.menu_profile -> {
                     binding.vpMain.currentItem = FIRST_FRAGMENT
                     true
