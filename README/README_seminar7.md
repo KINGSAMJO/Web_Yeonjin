@@ -154,6 +154,7 @@ fun <ResponseType> Call<ResponseType>.enqueueUtil(
    })
 }
 ```
++ `Toast.makeText()` 확장함수 사용
 
 + DiffUtil / ListAdapter
 ```kotlin
@@ -164,7 +165,7 @@ companion object {
          oldItem: ResponseGithubUserFollow,
          newItem: ResponseGithubUserFollow
       ): Boolean {
-         return oldItem.userId == newItem.userId || oldItem.avatar_url == newItem.avatar_url
+         return oldItem.userId == newItem.userId
       }
 
       override fun areContentsTheSame(
@@ -176,8 +177,10 @@ companion object {
    }
 }
 ```
-   - `followerAdapter.submitList(it)` : ListAdapter 부분 업데이트 위해 `submitList()` 사용
+   -`followerAdapter.submitList(it)` : ListAdapter 부분 업데이트 위해 `submitList()` 사용
+   - areItemsTheSame은 item의 고유한 값 한 가지만 비교하면 된다. 굳이 모든 속성을 전부 비교할 필요는 없다.
 
++ BaseActivity
 + BaseFragment
 ```kotlin
 //BaseFragment.kt
