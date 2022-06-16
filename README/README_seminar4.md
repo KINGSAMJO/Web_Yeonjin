@@ -122,3 +122,76 @@ private fun signUpNetwork(){
 
 ![postman](https://user-images.githubusercontent.com/102457618/168279589-bc27273f-2fe4-41f4-921f-86d20eab7986.JPG)
 ![toast](https://user-images.githubusercontent.com/102457618/168279967-5d257cf5-44f1-4237-8f04-098d791cdd98.gif)
+
+
+-----------------
+# 성장과제 2-1
+Github API 연동해서 리스트로 띄우기
+
+**Follower 리스트 연동하기**
+1. 서버 연결 위한 객체 설계
+```kotlin
+//ResponseGithubUserFollow.kt
+data class ResponseGithubUserFollow(
+    @SerializedName("login")
+    val userId : String,
+    val avatar_url : String
+)
+```
+    - follower 리스트는 get으로 받아오기 때문에 따로 request 객체가 필요하지 않다.
+    - userId : 유저의 아이디
+    - avatar_url : 유저의 프로필 사진 링크
+
+2. Retrofit Interface 설계
+```kotlin
+//GithubApiService.kt
+interface GithubApiService {
+    @GET("/users/yeoncheong/followers")
+    fun fetchGithubFollowers(
+    ): Call<List<ResponseGithubUserFollow>>
+}
+```
+    - @GET : 정보 조회 용도로 READ
+    - url이 /users/{username}/followers 이므로 사이에 내 깃허브 아이디를 넣어준다.
+    - 유저 Follower 정보는 객체가 아닌 리스트로 날아오기 때문에 꼭 List로 받아줘야 한다.
+
+```kotlin
+//GithubApiCreator.kt
+object GithubApiCreator {
+    private const val BASE_URL = "https://api.github.com"
+
+    private val retrofit: Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    val githubApiService : GithubApiService = retrofit.create(GithubApiService::class.java)
+}
+```
+
+3. Callback 등록하여 통신 요청
+```kotlin
+//FollowerFragment.kt
+private fun followingNetwork() {
+    val call: Call<List<ResponseGithubUserFollow>> =
+        GithubApiCreator.githubApiService.fetchGithubFollowers()
+
+    call.enqueueUtil(
+        onSuccess = {
+            it.let {
+                followerAdapter.submitList(it)
+            }
+        },
+        onError = {
+            when (it) {
+                304 -> Toast.makeText(requireContext(), "Not modified", Toast.LENGTH_SHORT).show()
+                401 -> Toast.makeText(requireContext(), "Requires authentication", Toast.LENGTH_SHORT).show()
+                403 -> Toast.makeText(requireContext(), "Forbidden", Toast.LENGTH_SHORT).show()
+            }
+        }
+    )
+}
+```
+    - 보낼 것이 없기 때문에 서버에 요청을 보내기 위한 RequestData 생성할 필요 X
+    - Call 객체 사용 시 꼭 List에 담아서 보낼 것
+    - 유저 정보와 레포지토리 받아올 때도 같은 방식으로 하면 된다.

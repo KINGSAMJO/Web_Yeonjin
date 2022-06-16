@@ -7,7 +7,7 @@
 
         <variable
             name="follower"
-            type="com.example.soptseminar1.ResponseGithubUserFollow" />
+            type="com.example.soptseminar1.data.model.response.ResponseGithubUserFollow" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,6 +35,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/nanum_gothic_kr"
+            android:textFontWeight="200"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:text="@{follower.userId}"
@@ -48,10 +49,10 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:fontFamily="@font/nanum_gothic_kr"
+            android:textFontWeight="200"
             android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:text="@{follower.bio}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/prof_name"
             app:layout_constraintTop_toBottomOf="@id/prof_name"

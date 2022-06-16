@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
+    tools:context=".presentation.home.HomeFragment">
 
     <ImageView
         android:id="@+id/image_home"
@@ -27,7 +27,8 @@
         android:text="@string/github"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:fontFamily="@font/nanum_gothic_bold_kr"
+        android:fontFamily="@font/nanum_gothic_kr"
+        android:textFontWeight="400"
         app:layout_constraintTop_toBottomOf="@id/image_home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +43,7 @@
         app:tabIndicatorColor="@color/layout"
         app:tabSelectedTextColor="@color/layout"/>
 
-    <com.example.soptseminar1.NestedScrollableHost
+    <com.example.soptseminar1.presentation.home.NestedScrollableHost
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,6 +54,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </com.example.soptseminar1.NestedScrollableHost>
+    </com.example.soptseminar1.presentation.home.NestedScrollableHost>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

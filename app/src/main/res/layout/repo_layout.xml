@@ -7,7 +7,7 @@
 
         <variable
             name="repo"
-            type="com.example.soptseminar1.ResponseGithubUserRepo" />
+            type="com.example.soptseminar1.data.model.response.ResponseGithubUserRepo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,8 @@
             android:id="@+id/repo_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nanum_gothic_bold_kr"
+            android:fontFamily="@font/nanum_gothic_kr"
+            android:textFontWeight="400"
             android:text="@{repo.name}"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +35,7 @@
             android:layout_marginTop="10dp"
             android:ellipsize="end"
             android:fontFamily="@font/nanum_gothic_kr"
+            android:textFontWeight="200"
             android:maxLines="1"
             android:text="@{repo.description}"
             android:textSize="15sp"
