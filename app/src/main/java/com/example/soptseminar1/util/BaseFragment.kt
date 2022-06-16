@@ -14,7 +14,7 @@ typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 abstract class BaseFragment<T: ViewBinding>(private val inflate: Inflate<T>):
     Fragment() {
     private var _binding: T? = null
-    val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다.")
+    protected val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다.")
 
     override fun onCreateView(
         inflater: LayoutInflater,
