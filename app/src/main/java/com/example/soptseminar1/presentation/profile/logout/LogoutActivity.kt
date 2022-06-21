@@ -1,8 +1,10 @@
 package com.example.soptseminar1.presentation.profile.logout
 
+import android.content.Intent
 import android.os.Bundle
 import com.example.soptseminar1.data.api.SOPTSharedPreferences
 import com.example.soptseminar1.databinding.ActivityLogoutBinding
+import com.example.soptseminar1.presentation.signin.SignInActivity
 import com.example.soptseminar1.util.BaseActivity
 import com.example.soptseminar1.util.showToast
 
@@ -19,6 +21,9 @@ class LogoutActivity : BaseActivity<ActivityLogoutBinding>({
         binding.ivLogout.setOnClickListener {
             SOPTSharedPreferences.setLogout(this)
             showToast("자동 로그인이 해제되었습니다.")
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }
