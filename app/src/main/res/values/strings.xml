@@ -32,5 +32,7 @@
     <string name="onboarding_hello">GitHub에 오신걸\n환영합니다!</string>
     <string name="onboarding_time">GitHub에서 즐거운 시간\n보내시길 바랍니다!</string>
     <string name="onboarding_start">GitHub를\n시작해봅시다!</string>
+    <string name="setting">환경설정</string>
+    <string name="logout">로그아웃</string>
 
 </resources>
