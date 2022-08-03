@@ -8,14 +8,14 @@ import retrofit2.http.GET
 
 interface GithubApiService {
     @GET("/users/yeoncheong")
-    fun fetchGithubUserInformation(
-    ): Call<ResponseGithubUserInformation>
+    suspend fun fetchGithubUserInformation(
+    ): ResponseGithubUserInformation
 
     @GET("/users/yeoncheong/followers")
-    fun fetchGithubFollowers(
-    ): Call<List<ResponseGithubUserFollow>>
+    suspend fun fetchGithubFollowers(
+    ): List<ResponseGithubUserFollow>
 
     @GET("/users/yeoncheong/repos")
-    fun fetchGithubRepos(
-    ): Call<List<ResponseGithubUserRepo>>
+    suspend fun fetchGithubRepos(
+    ): List<ResponseGithubUserRepo>
 }
