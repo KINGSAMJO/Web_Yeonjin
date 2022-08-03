@@ -19,8 +19,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>({
     ActivitySignUpBinding.inflate(it)
 }) {
 
-    lateinit var service: SoptService
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,7 +41,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>({
 
         lifecycleScope.launch {
             runCatching {
-                service.postSignUp(requestSignUp)
+                ServiceCreator.soptService.postSignUp(requestSignUp)
             }.onSuccess {
                 val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
                 intent.putExtra("edit_id", binding.idEdit.text.toString())

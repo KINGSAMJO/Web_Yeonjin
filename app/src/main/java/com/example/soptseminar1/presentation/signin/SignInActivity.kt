@@ -22,7 +22,6 @@ class SignInActivity : BaseActivity<ActivityMainBinding>({
     ActivityMainBinding.inflate(it)
 }) {
 
-    lateinit var service: SoptService
     private val activityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
@@ -74,7 +73,7 @@ class SignInActivity : BaseActivity<ActivityMainBinding>({
 
         lifecycleScope.launch {
             runCatching {
-                service.postLogin(requestSignIn)
+                ServiceCreator.soptService.postLogin(requestSignIn)
             }.onSuccess {
                 val data = it.data
                 showToast("${data?.email}님 반갑습니다!")
