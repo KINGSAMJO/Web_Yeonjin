@@ -3,6 +3,7 @@ package com.example.soptseminar1.presentation.profile
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.soptseminar1.R
 import com.example.soptseminar1.data.api.GithubApiCreator
@@ -14,6 +15,7 @@ import com.example.soptseminar1.presentation.profile.logout.LogoutActivity
 import com.example.soptseminar1.presentation.profile.repository.RepositoryFragment
 import com.example.soptseminar1.util.BaseFragment
 import com.example.soptseminar1.util.showToast
+import kotlinx.coroutines.launch
 import retrofit2.Call
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
@@ -35,24 +37,22 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     private fun userInfoNetworking() {
-        val call: Call<ResponseGithubUserInformation> =
-            GithubApiCreator.githubApiService.fetchGithubUserInformation()
-
-        call.enqueueUtil(
-            onSuccess = {
+        lifecycleScope.launch {
+            runCatching {
+                GithubApiCreator.githubApiService.fetchGithubUserInformation()
+            }.onSuccess {
                 it.let {
-                    Glide.with(this)
+                    Glide.with(this@ProfileFragment)
                         .load(it.avatar_url)
                         .circleCrop()
                         .into(binding.myImage)
                     binding.myName.text = it.name
                     binding.myId.text = it.userId
                 }
-            },
-            onError = {
-                requireContext().showToast("불러오기에 실패했습니다.")
+            }.onFailure {
+                requireContext().showToast("$it")
             }
-        )
+        }
     }
 
     private fun initTransactionEvent() {
