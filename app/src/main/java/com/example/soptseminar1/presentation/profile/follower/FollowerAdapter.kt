@@ -27,12 +27,11 @@ class FollowerAdapter(private val itemClick: (ResponseGithubUserFollow) -> (Unit
         private val itemClick: (ResponseGithubUserFollow) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ResponseGithubUserFollow) {
-
             Glide.with(binding.root)
                 .load(data.avatar_url)
                 .circleCrop()
                 .into(binding.profPic)
-            binding.profName.text = data.userId
+            binding.follower = data
             binding.root.setOnClickListener {
                 itemClick(data)
             }

@@ -42,12 +42,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 GithubApiCreator.githubApiService.fetchGithubUserInformation()
             }.onSuccess {
                 it.let {
+                    //바인딩어댑터 사용
                     Glide.with(this@ProfileFragment)
                         .load(it.avatar_url)
                         .circleCrop()
                         .into(binding.myImage)
-                    binding.myName.text = it.name
-                    binding.myId.text = it.userId
+                    binding.userinfo = it
                 }
             }.onFailure {
                 requireContext().showToast("$it")
