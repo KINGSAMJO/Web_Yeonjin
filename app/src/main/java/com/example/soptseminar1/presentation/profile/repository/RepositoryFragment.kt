@@ -11,11 +11,16 @@ import com.example.soptseminar1.util.enqueueUtil
 import com.example.soptseminar1.util.MyItemDecoration
 import com.example.soptseminar1.util.BaseFragment
 import com.example.soptseminar1.util.showToast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import retrofit2.Call
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class RepositoryFragment : BaseFragment<FragmentRepositoryBinding>(FragmentRepositoryBinding::inflate) {
 
+    @Inject
+    lateinit var service: GithubApiService
     private lateinit var repositoryAdapter: RepositoryAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,7 +37,7 @@ class RepositoryFragment : BaseFragment<FragmentRepositoryBinding>(FragmentRepos
     private fun repoNetwork() {
         lifecycleScope.launch {
             runCatching {
-                GithubApiCreator.githubApiService.fetchGithubRepos()
+                service.fetchGithubRepos()
             }.onSuccess {
                 it.let {
                     repositoryAdapter.submitList(it)

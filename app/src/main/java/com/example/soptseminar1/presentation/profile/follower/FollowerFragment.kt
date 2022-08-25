@@ -13,11 +13,16 @@ import com.example.soptseminar1.databinding.FragmentFollowerBinding
 import com.example.soptseminar1.util.enqueueUtil
 import com.example.soptseminar1.util.BaseFragment
 import com.example.soptseminar1.util.showToast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import retrofit2.Call
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class FollowerFragment : BaseFragment<FragmentFollowerBinding>(FragmentFollowerBinding::inflate) {
 
+    @Inject
+    lateinit var service: GithubApiService
     private lateinit var followerAdapter: FollowerAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +46,7 @@ class FollowerFragment : BaseFragment<FragmentFollowerBinding>(FragmentFollowerB
     private fun followingNetwork() {
         lifecycleScope.launch {
             runCatching {
-                GithubApiCreator.githubApiService.fetchGithubFollowers()
+                service.fetchGithubFollowers()
             }.onSuccess {
                 it.let {
                     followerAdapter.submitList(it)

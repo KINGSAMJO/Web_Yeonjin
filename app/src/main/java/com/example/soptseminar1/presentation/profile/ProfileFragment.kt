@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.soptseminar1.R
 import com.example.soptseminar1.data.api.GithubApiCreator
+import com.example.soptseminar1.data.api.GithubApiService
 import com.example.soptseminar1.data.model.response.ResponseGithubUserInformation
 import com.example.soptseminar1.databinding.FragmentProfileBinding
 import com.example.soptseminar1.util.enqueueUtil
@@ -15,11 +16,16 @@ import com.example.soptseminar1.presentation.profile.logout.LogoutActivity
 import com.example.soptseminar1.presentation.profile.repository.RepositoryFragment
 import com.example.soptseminar1.util.BaseFragment
 import com.example.soptseminar1.util.showToast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import retrofit2.Call
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
 
+    @Inject
+    lateinit var service: GithubApiService
     private var position = FOLLOWER
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,7 +45,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun userInfoNetworking() {
         lifecycleScope.launch {
             runCatching {
-                GithubApiCreator.githubApiService.fetchGithubUserInformation()
+                service.fetchGithubUserInformation()
             }.onSuccess {
                 it.let {
                     //바인딩어댑터 사용
