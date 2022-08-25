@@ -7,7 +7,9 @@ import com.example.soptseminar1.R
 import com.example.soptseminar1.databinding.ActivityHomeBinding
 import com.example.soptseminar1.presentation.camera.CameraFragment
 import com.example.soptseminar1.util.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>({
     ActivityHomeBinding.inflate(it) }) {
 

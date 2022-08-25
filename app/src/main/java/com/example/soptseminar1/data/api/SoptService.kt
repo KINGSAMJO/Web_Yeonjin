@@ -2,6 +2,7 @@ package com.example.soptseminar1.data.api
 
 import com.example.soptseminar1.data.model.request.RequestSignIn
 import com.example.soptseminar1.data.model.request.RequestSignUp
+import com.example.soptseminar1.data.model.response.BaseResponse
 import com.example.soptseminar1.data.model.response.ResponseSignIn
 import com.example.soptseminar1.data.model.response.ResponseSignUp
 import retrofit2.Call
@@ -10,12 +11,12 @@ import retrofit2.http.POST
 
 interface SoptService {
     @POST("auth/signin")
-    fun postLogin(
+    suspend fun postLogin(
         @Body body: RequestSignIn
-    ): Call<ResponseSignIn>
+    ): BaseResponse<ResponseSignIn>
 
     @POST("auth/signup")
-    fun postSignUp(
+    suspend fun postSignUp(
         @Body body: RequestSignUp
-    ): Call<ResponseSignUp>
+    ): BaseResponse<ResponseSignUp>
 }

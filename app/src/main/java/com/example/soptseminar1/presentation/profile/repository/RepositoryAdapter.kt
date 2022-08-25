@@ -25,8 +25,7 @@ class RepositoryAdapter : ListAdapter<ResponseGithubUserRepo, RepositoryAdapter.
         private val binding: RepoLayoutBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ResponseGithubUserRepo) {
-            binding.repoName.text = data.name
-            binding.repoDescription.text = data.description
+            binding.repo = data
         }
     }
 
